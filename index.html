@@ -12,40 +12,147 @@
       color: #1f1f1f;
       background: #f8f6f2;
     }
+
     header {
       background: #0f5f5c;
       color: white;
       padding: 20px;
       text-align: center;
     }
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
       padding: 30px 20px;
     }
+
     .hero {
       background: white;
       border-radius: 16px;
       padding: 40px 24px;
       margin-top: 24px;
     }
+
+    .hero-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      height: 360px;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1.2s ease-in-out;
+    }
+
+    .hero-image-before {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .hero-image-after {
+      opacity: 0;
+      z-index: 2;
+    }
+
     h1, h2 {
       margin-top: 0;
     }
+
     .price {
       font-size: 2rem;
       color: #0f5f5c;
       font-weight: bold;
     }
+
     .section {
       background: white;
       border-radius: 16px;
       padding: 28px 24px;
       margin-top: 24px;
     }
+
+    .cases-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .case-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .case-images {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .case-images figure {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 6px;
+      margin: 0;
+    }
+
+    .case-images img {
+      border-radius: 4px;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .case-images figcaption {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .field {
+      margin-top: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d8d8d8;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      background: white;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
     ul {
       padding-left: 20px;
     }
+
     .cta {
       display: inline-block;
       background: #0f5f5c;
@@ -54,11 +161,41 @@
       border-radius: 999px;
       text-decoration: none;
       margin-top: 16px;
+      border: none;
+      cursor: pointer;
     }
+
     footer {
       text-align: center;
       padding: 30px 20px;
       color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 28px 18px;
+      }
+
+      .section,
+      .cases-section {
+        padding: 22px 18px;
+      }
+
+      .hero-media {
+        height: 220px;
+      }
+
+      .cases-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-images {
+        grid-template-columns: 1fr;
+      }
+
+      .price {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
@@ -70,11 +207,30 @@
 
   <div class="container">
     <section class="hero">
+      <div class="hero-media">
+        <img
+          src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/d295ba30-1961-4766-ac60-3015382a60ac.png"
+          alt="术前：一位年长亚洲男士因牙齿缺失进食困难"
+          class="hero-image hero-image-before"
+          loading="lazy"
+          width="1200"
+          height="675"
+        />
+        <img
+          src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/bb480058-3d2e-4b49-8e43-af4c5a0889c0.png"
+          alt="术后：同一位年长亚洲男士完成全口重建后轻松进食"
+          class="hero-image hero-image-after"
+          loading="lazy"
+          width="1200"
+          height="675"
+        />
+      </div>
+
       <h2>在波士顿开启全口重建</h2>
-      <p>高端、亲切的 All-on-X 咨询与治疗体验。</p>
+      <p>完善、系统的 All-on-X 咨询与治疗体验。</p>
       <p class="price">$15,000 / 每个牙弓</p>
-      <p>包含：拔牙、骨移植、6颗种植体、修复体</p>
-      <p>咨询与 CBCT 费用：$200</p>
+      <p>包含：拔牙、骨移植、6颗种植体、修复体。</p>
+      <p>术前与 CBCT 费用：$200</p>
       <a href="#contact" class="cta">立即预约咨询</a>
     </section>
 
@@ -93,99 +249,190 @@
       </ul>
     </section>
 
+    <section class="cases-section">
+      <h2>典型案例（示意图）</h2>
+      <p>以下图片为示意图，仅用于说明全口重建治疗方向，具体方案需由医生面诊评估。</p>
+
+      <div class="cases-grid">
+        <article class="case-card">
+          <h3>案例一：年长女士</h3>
+          <p>长期缺牙及牙齿损坏，影响咀嚼与微笑自信。</p>
+
+          <div class="case-images">
+            <figure>
+              <img
+                src="https://picsum.photos/seed/older-lady-before/480/320"
+                alt="示意图：年长女士治疗前，牙齿缺失与损坏明显"
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>治疗前（示意图）</figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="https://picsum.photos/seed/older-lady-after/480/320"
+                alt="示意图：年长女士完成全口重建后的自然微笑"
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>治疗后（示意图）</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <h3>案例二：中年男士</h3>
+          <p>多颗牙缺失或严重磨损，希望恢复正常进食与外观。</p>
+
+          <div class="case-images">
+            <figure>
+              <img
+                src="https://picsum.photos/seed/middle-man-before/480/320"
+                alt="示意图：中年男士治疗前，缺失牙导致微笑受限"
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>治疗前（示意图）</figcaption>
+            </figure>
+
+            <figure>
+              <img
+                src="https://picsum.photos/seed/middle-man-after/480/320"
+                alt="示意图：中年男士完成全口重建后自信微笑"
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>治疗后（示意图）</figcaption>
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="contact">
-  <h2>预约全口重建咨询</h2>
-  <p>填写以下信息，我们会通过电话或邮件联系您安排初诊咨询。</p>
+      <h2>预约全口重建咨询</h2>
+      <p>填写以下信息，我们会通过电话或邮件联系您安排初诊咨询。</p>
 
-  <form id="all-on-x-form">
-    <div class="field">
-      <label for="full_name">姓名 / Name*</label>
-      <input id="full_name" name="full_name" type="text" required />
-    </div>
+      <form id="all-on-x-form">
+        <div class="field">
+          <label for="full_name">姓名 / Name*</label>
+          <input id="full_name" name="full_name" type="text" required />
+        </div>
 
-    <div class="field">
-      <label for="phone">电话 / Phone*</label>
-      <input id="phone" name="phone" type="tel" required />
-    </div>
+        <div class="field">
+          <label for="phone">电话 / Phone*</label>
+          <input id="phone" name="phone" type="tel" required />
+        </div>
 
-    <div class="field">
-      <label for="email">邮箱 / Email</label>
-      <input id="email" name="email" type="email" />
-    </div>
+        <div class="field">
+          <label for="email">邮箱 / Email</label>
+          <input id="email" name="email" type="email" />
+        </div>
 
-    <div class="field">
-      <label for="preferred_language">语言 / Preferred language</label>
-      <select id="preferred_language" name="preferred_language">
-        <option value="zh">中文</option>
-        <option value="en">English</option>
-      </select>
-    </div>
+        <div class="field">
+          <label for="preferred_language">语言 / Preferred language</label>
+          <select id="preferred_language" name="preferred_language">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+          </select>
+        </div>
 
-    <div class="field">
-      <label for="notes">牙齿情况简述 / Notes</label>
-      <textarea id="notes" name="notes" rows="4"></textarea>
-    </div>
+        <div class="field">
+          <label for="notes">牙齿情况简述 / Notes</label>
+          <textarea id="notes" name="notes" rows="4"></textarea>
+        </div>
 
-    <button type="submit" class="cta">提交信息 Submit</button>
-    <p id="form-status" style="margin-top: 10px; color: #0f5f5c;"></p>
-  </form>
+        <button type="submit" class="cta">提交信息 Submit</button>
+        <p id="form-status" style="margin-top: 10px; color: #0f5f5c;"></p>
+      </form>
 
-  <p style="margin-top: 16px;">或直接致电：<strong>(617) 542-6263</strong></p>
-</section>
+      <p style="margin-top: 16px;">或直接致电：<strong>(617) 542-6263</strong></p>
+    </section>
   </div>
 
   <footer>
     <p>BMY Dental · Boston, Massachusetts</p>
   </footer>
+
   <script src="https://unpkg.com/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
-<script>
-  const SUPABASE_URL = 'https://mpyvzsfghxqppmaozcrb.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_frWVqQ-gQkmWp9Y0hrWlbw_PydxExjM';
 
-  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  <script>
+    (function () {
+      const before = document.querySelector('.hero-image-before');
+      const after = document.querySelector('.hero-image-after');
 
-  const form = document.getElementById('all-on-x-form');
-  const statusEl = document.getElementById('form-status');
+      if (!before || !after) return;
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    statusEl.textContent = '提交中 / Submitting...';
+      let showingAfter = false;
 
-    const full_name = document.getElementById('full_name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const preferred_language = document.getElementById('preferred_language').value;
-    const notes = document.getElementById('notes').value.trim();
+      setInterval(() => {
+        showingAfter = !showingAfter;
 
-    try {
-      const { error } = await supabaseClient
-        .from('all_on_x_leads')
-        .insert([
-          {
-            full_name,
-            phone,
-            email: email || null,
-            preferred_language,
-            notes: notes || null
-          }
-        ]);
+        if (showingAfter) {
+          before.style.opacity = '0';
+          after.style.opacity = '1';
+        } else {
+          before.style.opacity = '1';
+          after.style.opacity = '0';
+        }
+      }, 4500);
+    })();
+  </script>
 
-      if (error) {
-        console.error(error);
-        statusEl.textContent = '提交失败，请稍后重试 / Submission failed, please try again.';
+  <script>
+    const SUPABASE_URL = 'https://mpyvzsfghxqppmaozcrb.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_frWVqQ-gQkmWp9Y0hrWlbw_PydxExjM';
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById('all-on-x-form');
+    const statusEl = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      statusEl.textContent = '提交中 / Submitting...';
+      statusEl.style.color = '#0f5f5c';
+
+      const full_name = document.getElementById('full_name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const preferred_language = document.getElementById('preferred_language').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      try {
+        const { error } = await supabaseClient
+          .from('all_on_x_leads')
+          .insert([
+            {
+              full_name,
+              phone,
+              email: email || null,
+              preferred_language,
+              notes: notes || null
+            }
+          ]);
+
+        if (error) {
+          console.error(error);
+          statusEl.textContent = '提交失败，请稍后重试 / Submission failed, please try again.';
+          statusEl.style.color = '#b3261e';
+        } else {
+          statusEl.textContent = '提交成功，我们会尽快与您联系 / Submitted successfully, we will contact you.';
+          statusEl.style.color = '#0f5f5c';
+          form.reset();
+          document.getElementById('preferred_language').value = 'zh';
+        }
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = '网络错误，请稍后重试 / Network error, please try again.';
         statusEl.style.color = '#b3261e';
-      } else {
-        statusEl.textContent = '提交成功，我们会尽快与您联系 / Submitted successfully, we will contact you.';
-        statusEl.style.color = '#0f5f5c';
-        form.reset();
-        document.getElementById('preferred_language').value = 'zh';
       }
-    } catch (err) {
-      console.error(err);
-      statusEl.textContent = '网络错误，请稍后重试 / Network error, please try again.';
-      statusEl.style.color = '#b3261e';
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
