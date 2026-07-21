@@ -93,14 +93,99 @@
       </ul>
     </section>
 
-    <section class="section">
-      <h2>联系方式</h2>
-      <p id="contact">电话、邮箱、WeChat、WhatsApp 可在下一版加入。</p>
-    </section>
+    <section class="section" id="contact">
+  <h2>预约全口重建咨询</h2>
+  <p>填写以下信息，我们会通过电话或邮件联系您安排初诊咨询。</p>
+
+  <form id="all-on-x-form">
+    <div class="field">
+      <label for="full_name">姓名 / Name*</label>
+      <input id="full_name" name="full_name" type="text" required />
+    </div>
+
+    <div class="field">
+      <label for="phone">电话 / Phone*</label>
+      <input id="phone" name="phone" type="tel" required />
+    </div>
+
+    <div class="field">
+      <label for="email">邮箱 / Email</label>
+      <input id="email" name="email" type="email" />
+    </div>
+
+    <div class="field">
+      <label for="preferred_language">语言 / Preferred language</label>
+      <select id="preferred_language" name="preferred_language">
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="notes">牙齿情况简述 / Notes</label>
+      <textarea id="notes" name="notes" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="cta">提交信息 Submit</button>
+    <p id="form-status" style="margin-top: 10px; color: #0f5f5c;"></p>
+  </form>
+
+  <p style="margin-top: 16px;">或直接致电：<strong>(617) 542-6263</strong></p>
+</section>
   </div>
 
   <footer>
     <p>BMY Dental · Boston, Massachusetts</p>
   </footer>
+  <script src="https://unpkg.com/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
+<script>
+  const SUPABASE_URL = 'https://mpyvzsfghxqppmaozcrb.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_frWVqQ-gQkmWp9Y0hrWlbw_PydxExjM';
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById('all-on-x-form');
+  const statusEl = document.getElementById('form-status');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    statusEl.textContent = '提交中 / Submitting...';
+
+    const full_name = document.getElementById('full_name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const preferred_language = document.getElementById('preferred_language').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    try {
+      const { error } = await supabaseClient
+        .from('all_on_x_leads')
+        .insert([
+          {
+            full_name,
+            phone,
+            email: email || null,
+            preferred_language,
+            notes: notes || null
+          }
+        ]);
+
+      if (error) {
+        console.error(error);
+        statusEl.textContent = '提交失败，请稍后重试 / Submission failed, please try again.';
+        statusEl.style.color = '#b3261e';
+      } else {
+        statusEl.textContent = '提交成功，我们会尽快与您联系 / Submitted successfully, we will contact you.';
+        statusEl.style.color = '#0f5f5c';
+        form.reset();
+        document.getElementById('preferred_language').value = 'zh';
+      }
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = '网络错误，请稍后重试 / Network error, please try again.';
+      statusEl.style.color = '#b3261e';
+    }
+  });
+</script>
 </body>
 </html>
