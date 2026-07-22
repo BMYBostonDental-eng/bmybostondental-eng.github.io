@@ -20,67 +20,125 @@
       text-align: center;
     }
 
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    header .lang-toggle {
+      margin-top: 12px;
+      background: #ffffff;
+      color: #0f5f5c;
+      border: 1px solid #0f5f5c;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 30px 20px;
+      padding: 30px 20px 40px;
     }
 
     .hero {
       background: white;
       border-radius: 16px;
-      padding: 40px 24px;
+      padding: 32px 24px;
       margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 24px;
+      align-items: center;
     }
 
-    .hero-media {
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-      margin-bottom: 24px;
-      height: 360px;
-    }
-
-    .hero-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: opacity 1.2s ease-in-out;
-    }
-
-    .hero-image-before {
-      opacity: 1;
-      z-index: 1;
-    }
-
-    .hero-image-after {
-      opacity: 0;
-      z-index: 2;
-    }
-
-    h1, h2 {
+    .hero-copy h2 {
       margin-top: 0;
+      font-size: 1.8rem;
+    }
+
+    .hero-copy p {
+      margin: 8px 0;
+    }
+
+    .hero-tagline {
+      font-size: 0.95rem;
+      color: #555;
     }
 
     .price {
-      font-size: 2rem;
+      font-size: 1.6rem;
       color: #0f5f5c;
       font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .hero-list {
+      margin-top: 12px;
+      padding-left: 18px;
+      font-size: 0.95rem;
+    }
+
+    .hero-image-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .section {
       background: white;
       border-radius: 16px;
-      padding: 28px 24px;
+      padding: 26px 24px;
       margin-top: 24px;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: #0f5f5c;
+      color: white;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      margin-top: 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .cta-secondary {
+      display: inline-block;
+      margin-left: 12px;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: #0f5f5c;
+      text-decoration: underline;
     }
 
     .cases-section {
       background: white;
       border-radius: 16px;
-      padding: 20px 24px;
+      padding: 26px 24px;
       margin-top: 24px;
     }
 
@@ -92,14 +150,20 @@
     }
 
     .case-card h3 {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+
+    .case-card p {
+      margin: 4px 0 10px;
+      font-size: 0.95rem;
     }
 
     .case-images {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     .case-images figure {
@@ -130,16 +194,17 @@
       display: block;
       margin-bottom: 6px;
       font-weight: bold;
+      font-size: 0.95rem;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 12px 14px;
+      padding: 10px 12px;
       border: 1px solid #d8d8d8;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-family: Arial, sans-serif;
       box-sizing: border-box;
       background: white;
@@ -149,40 +214,35 @@
       resize: vertical;
     }
 
-    ul {
-      padding-left: 20px;
-    }
-
-    .cta {
-      display: inline-block;
-      background: #0f5f5c;
-      color: white;
-      padding: 14px 22px;
-      border-radius: 999px;
-      text-decoration: none;
-      margin-top: 16px;
-      border: none;
-      cursor: pointer;
-    }
-
     footer {
       text-align: center;
       padding: 30px 20px;
       color: #666;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image-wrap {
+        order: -1;
+      }
+
+      .container {
+        padding: 24px 16px 30px;
+      }
     }
 
     @media (max-width: 600px) {
       .hero {
-        padding: 28px 18px;
+        padding: 24px 18px;
       }
 
       .section,
       .cases-section {
         padding: 22px 18px;
-      }
-
-      .hero-media {
-        height: 220px;
       }
 
       .cases-grid {
@@ -192,198 +252,368 @@
       .case-images {
         grid-template-columns: 1fr;
       }
-
-      .price {
-        font-size: 1.6rem;
-      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>BMY Dental</h1>
-    <p>Boston All-on-X Full-Arch Implant Landing Page</p>
+    <p data-lang="zh">波士顿全口重建 · All-on-X 专业诊所</p>
+    <p data-lang="en" style="display:none;">Boston All-on-X · Full-Arch Implant Center</p>
+
+    <button type="button" class="lang-toggle" data-lang-toggle>
+      中文 / English
+    </button>
   </header>
 
   <div class="container">
-    <section class="hero">
-      <div class="hero-media">
+    <!-- HERO – Chinese -->
+    <section class="hero" data-lang="zh">
+      <div class="hero-copy">
+        <h2>一次全口重建，重获稳定笑容</h2>
+        <p class="hero-tagline">
+          针对多颗缺牙、活动假牙不稳、反复牙齿问题的患者，提供完整的 All-on-X 全口种植方案。
+        </p>
+        <p class="price">$15,000 / 每个牙弓</p>
+        <ul class="hero-list">
+          <li>包含拔牙、骨移植、6 颗种植体及最终修复体</li>
+          <li>固定式修复，告别活动假牙不稳、不舒适</li>
+          <li>术前评估及 CBCT：$200（抵扣治疗费用）</li>
+        </ul>
+        <a href="#contact" class="cta">预约全口重建咨询</a>
+        <a href="#cases" class="cta-secondary">查看示例病例</a>
+      </div>
+
+      <div class="hero-image-wrap">
         <img
-          src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/d295ba30-1961-4766-ac60-3015382a60ac.png"
-          alt="术前：一位年长亚洲男士因牙齿缺失进食困难"
-          class="hero-image hero-image-before"
-          loading="lazy"
-          width="1200"
-          height="675"
-        />
-        <img
-          src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/bb480058-3d2e-4b49-8e43-af4c5a0889c0.png"
-          alt="术后：同一位年长亚洲男士完成全口重建后轻松进食"
-          class="hero-image hero-image-after"
+          src="generated-image-4.jpg"
+          alt="全口重建后笑容稳定、自然的年长亚洲男士示意图"
+          class="hero-image"
           loading="lazy"
           width="1200"
           height="675"
         />
       </div>
-
-      <h2>在波士顿开启全口重建</h2>
-      <p>完善、系统的 All-on-X 咨询与治疗体验。</p>
-      <p class="price">$15,000 / 每个牙弓</p>
-      <p>包含：拔牙、骨移植、6颗种植体、修复体。</p>
-      <p>术前与 CBCT 费用：$200</p>
-      <a href="#contact" class="cta">立即预约咨询</a>
     </section>
 
-    <section class="section">
+    <!-- HERO – English -->
+    <section class="hero" data-lang="en" style="display:none;">
+      <div class="hero-copy">
+        <h2>One full-arch solution for a stable smile</h2>
+        <p class="hero-tagline">
+          Comprehensive All-on-X care for patients with multiple missing teeth,
+          loose teeth, or unstable dentures.
+        </p>
+        <p class="price">$15,000 per arch</p>
+        <ul class="hero-list">
+          <li>Includes extractions, bone grafting, 6 implants, and final prosthesis.</li>
+          <li>Fixed restoration to replace unstable, uncomfortable dentures.</li>
+          <li>Pre-treatment consult and CBCT: $200 (applied toward treatment).</li>
+        </ul>
+        <a href="#contact" class="cta">Schedule All-on-X consultation</a>
+        <a href="#cases" class="cta-secondary">View example cases</a>
+      </div>
+
+      <div class="hero-image-wrap">
+        <img
+          src="generated-image-4.jpg"
+          alt="Illustrated older Asian man with a stable, natural smile after full-arch implant treatment."
+          class="hero-image"
+          loading="lazy"
+          width="1200"
+          height="675"
+        />
+      </div>
+    </section>
+
+    <!-- CLINIC INFO – Chinese -->
+    <section class="section" data-lang="zh">
       <h2>诊所信息</h2>
-      <p>BMY Dental</p>
-      <p>109 Beach St, Boston, MA 02111</p>
+      <p>BMY Dental · Bao Min Yee Dental</p>
+      <p>地址：109 Beach St, Boston, MA 02111</p>
+      <p>服务人群：波士顿及周边地区成年患者，特别是有多颗缺牙或活动假牙不适者。</p>
     </section>
 
-    <section class="section">
+    <!-- CLINIC INFO – English -->
+    <section class="section" data-lang="en" style="display:none;">
+      <h2>Clinic Information</h2>
+      <p>BMY Dental · Bao Min Yee Dental</p>
+      <p>Address: 109 Beach St, Boston, MA 02111</p>
+      <p>
+        We serve adult patients in Boston and surrounding areas, especially those
+        with multiple missing teeth or discomfort with dentures.
+      </p>
+    </section>
+
+    <!-- INDICATIONS – Chinese -->
+    <section class="section" data-lang="zh">
       <h2>适合对象</h2>
       <ul>
-        <li>多颗牙缺失或松动</li>
-        <li>牙齿严重损坏</li>
-        <li>希望做全口固定修复的患者</li>
+        <li>多颗牙缺失或松动，已影响正常咀嚼和外观。</li>
+        <li>目前佩戴活动假牙，但感觉不稳、不舒服或容易脱落。</li>
+        <li>希望通过固定式种植修复，获得长期稳定的全口牙列。</li>
+        <li>整体健康状况允许接受种植手术，愿意配合术前检查与影像评估。</li>
       </ul>
     </section>
 
-    <section class="cases-section">
-      <h2>典型案例（示意图）</h2>
-      <p>以下图片为示意图，仅用于说明全口重建治疗方向，具体方案需由医生面诊评估。</p>
+    <!-- INDICATIONS – English -->
+    <section class="section" data-lang="en" style="display:none;">
+      <h2>Who All-on-X is for</h2>
+      <ul>
+        <li>Multiple missing or loose teeth affecting chewing and appearance.</li>
+        <li>Current dentures feel unstable, uncomfortable, or frequently dislodge.</li>
+        <li>Seeking a long-term, fixed implant solution for a full arch of teeth.</li>
+        <li>Medically suitable for implant surgery and willing to complete imaging and evaluation.</li>
+      </ul>
+    </section>
+
+    <!-- CASES – Chinese -->
+    <section class="cases-section" id="cases" data-lang="zh">
+      <h2>示意病例：从缺牙到稳定笑容</h2>
+      <p>
+        以下为示意图，仅用于说明治疗方向及预期效果。实际方案需由医生根据您的口腔情况和影像检查进行评估。
+      </p>
 
       <div class="cases-grid">
         <article class="case-card">
-          <h3>案例一：年长女士</h3>
-          <p>长期缺牙及牙齿损坏，影响咀嚼与微笑自信。</p>
-
+          <h3>病例一：长期缺牙的年长男士</h3>
+          <p>
+            术前多颗缺牙，进食受限、假牙不稳；术后通过 All-on-X 全口固定式修复，咀嚼能力和笑容显著改善。
+          </p>
           <div class="case-images">
             <figure>
               <img
-                src="https://picsum.photos/seed/older-lady-before/480/320"
-                alt="示意图：年长女士治疗前，牙齿缺失与损坏明显"
+                src="https://picsum.photos/seed/bmy-before-1/480/320"
+                alt="示意图：术前多颗缺牙，笑容受限"
                 loading="lazy"
                 width="480"
                 height="320"
               />
-              <figcaption>治疗前（示意图）</figcaption>
+              <figcaption>术前示意图</figcaption>
             </figure>
-
             <figure>
               <img
-                src="https://picsum.photos/seed/older-lady-after/480/320"
-                alt="示意图：年长女士完成全口重建后的自然微笑"
+                src="https://picsum.photos/seed/bmy-after-1/480/320"
+                alt="示意图：术后固定式全口修复后笑容稳定自然"
                 loading="lazy"
                 width="480"
                 height="320"
               />
-              <figcaption>治疗后（示意图）</figcaption>
+              <figcaption>术后示意图</figcaption>
             </figure>
           </div>
         </article>
 
         <article class="case-card">
-          <h3>案例二：中年男士</h3>
-          <p>多颗牙缺失或严重磨损，希望恢复正常进食与外观。</p>
-
+          <h3>病例二：假牙不稳的中年患者</h3>
+          <p>
+            原有活动假牙经常松动；经评估后改为全口种植及混合修复，获得更稳定、舒适的佩戴体验。
+          </p>
           <div class="case-images">
             <figure>
               <img
-                src="https://picsum.photos/seed/middle-man-before/480/320"
-                alt="示意图：中年男士治疗前，缺失牙导致微笑受限"
+                src="https://picsum.photos/seed/bmy-prosthesis/480/320"
+                alt="示意图：全口混合修复体，在暗背景下的专业牙科照相"
                 loading="lazy"
                 width="480"
                 height="320"
               />
-              <figcaption>治疗前（示意图）</figcaption>
+              <figcaption>修复体示意图</figcaption>
             </figure>
-
             <figure>
               <img
-                src="https://picsum.photos/seed/middle-man-after/480/320"
-                alt="示意图：中年男士完成全口重建后自信微笑"
+                src="https://picsum.photos/seed/bmy-intraoral/480/320"
+                alt="示意图：术后口内牙列整齐、牙龈健康"
                 loading="lazy"
                 width="480"
                 height="320"
               />
-              <figcaption>治疗后（示意图）</figcaption>
+              <figcaption>术后口内示意图</figcaption>
             </figure>
           </div>
         </article>
       </div>
     </section>
 
+    <!-- CASES – English -->
+    <section class="cases-section" id="cases-en" data-lang="en" style="display:none;">
+      <h2>Illustrated cases: from missing teeth to stable smile</h2>
+      <p>
+        The images below are illustrations meant to show treatment direction and
+        potential outcomes. Your exact plan will be tailored after clinical and
+        imaging evaluation.
+      </p>
+
+      <div class="cases-grid">
+        <article class="case-card">
+          <h3>Case 1: Long-term missing teeth</h3>
+          <p>
+            Before: multiple missing teeth, limited chewing, reduced smile
+            confidence. After: All-on-X fixed full-arch restoration with improved
+            function and appearance.
+          </p>
+          <div class="case-images">
+            <figure>
+              <img
+                src="https://picsum.photos/seed/bmy-before-1/480/320"
+                alt="Illustrated pre-treatment example with multiple missing teeth and reduced smile confidence."
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>Before (illustration)</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://picsum.photos/seed/bmy-after-1/480/320"
+                alt="Illustrated post-treatment example with a stable, natural full-arch restoration."
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>After (illustration)</figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <h3>Case 2: Unstable dentures</h3>
+          <p>
+            Before: full denture frequently feels loose and uncomfortable. After:
+            implant-supported hybrid prosthesis for more stability and comfort.
+          </p>
+          <div class="case-images">
+            <figure>
+              <img
+                src="https://picsum.photos/seed/bmy-prosthesis/480/320"
+                alt="Illustrated full-arch hybrid prosthesis on a dark background."
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>Prosthesis (illustration)</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="https://picsum.photos/seed/bmy-intraoral/480/320"
+                alt="Illustrated intraoral view of a clean, restored smile after treatment."
+                loading="lazy"
+                width="480"
+                height="320"
+              />
+              <figcaption>Post-treatment intraoral (illustration)</figcaption>
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT – shared form, bilingual copy -->
     <section class="section" id="contact">
-      <h2>预约全口重建咨询</h2>
-      <p>填写以下信息，我们会通过电话或邮件联系您安排初诊咨询。</p>
+      <!-- Chinese intro -->
+      <h2 data-lang="zh">预约全口重建咨询</h2>
+      <p data-lang="zh">
+        请填写以下信息，我们会通过电话或邮件联系您安排初诊咨询，并说明适合您的全口重建方案。
+      </p>
+
+      <!-- English intro -->
+      <h2 data-lang="en" style="display:none;">Request an All-on-X consultation</h2>
+      <p data-lang="en" style="display:none;">
+        Share a few details below and we will contact you by phone or email to set
+        up an initial consultation and discuss your full-arch options.
+      </p>
 
       <form id="all-on-x-form">
         <div class="field">
-          <label for="full_name">姓名 / Name*</label>
+          <label data-lang="zh" for="full_name">姓名 / Name*</label>
+          <label data-lang="en" for="full_name" style="display:none;">Full name*</label>
           <input id="full_name" name="full_name" type="text" required />
         </div>
 
         <div class="field">
-          <label for="phone">电话 / Phone*</label>
+          <label data-lang="zh" for="phone">电话 / Phone*</label>
+          <label data-lang="en" for="phone" style="display:none;">Phone*</label>
           <input id="phone" name="phone" type="tel" required />
         </div>
 
         <div class="field">
-          <label for="email">邮箱 / Email</label>
+          <label data-lang="zh" for="email">邮箱 / Email</label>
+          <label data-lang="en" for="email" style="display:none;">Email</label>
           <input id="email" name="email" type="email" />
         </div>
 
         <div class="field">
-          <label for="preferred_language">语言 / Preferred language</label>
+          <label data-lang="zh" for="preferred_language">语言 / Preferred language</label>
+          <label data-lang="en" for="preferred_language" style="display:none;">Preferred language</label>
           <select id="preferred_language" name="preferred_language">
-            <option value="zh">中文</option>
+            <option value="zh" selected>中文 / Chinese</option>
             <option value="en">English</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="notes">牙齿情况简述 / Notes</label>
+          <label data-lang="zh" for="notes">牙齿情况简述 / Notes</label>
+          <label data-lang="en" for="notes" style="display:none;">Brief description of your teeth</label>
           <textarea id="notes" name="notes" rows="4"></textarea>
         </div>
 
-        <button type="submit" class="cta">提交信息 Submit</button>
+        <button type="submit" class="cta" data-lang="zh">提交信息 Submit</button>
+        <button type="submit" class="cta" data-lang="en" style="display:none;">Submit information</button>
+
         <p id="form-status" style="margin-top: 10px; color: #0f5f5c;"></p>
       </form>
 
-      <p style="margin-top: 16px;">或直接致电：<strong>(617) 542-6263</strong></p>
+      <p style="margin-top: 16px;" data-lang="zh">
+        或直接致电：<strong>(617) 542-6263</strong>
+      </p>
+      <p style="margin-top: 16px; display:none;" data-lang="en">
+        Or call us directly: <strong>(617) 542-6263</strong>
+      </p>
     </section>
   </div>
 
-  <footer>
-    <p>BMY Dental · Boston, Massachusetts</p>
+  <!-- FOOTER – Chinese -->
+  <footer data-lang="zh">
+    <p>BMY Dental · Boston, Massachusetts · 波士顿全口种植与重建诊所</p>
   </footer>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
+  <!-- FOOTER – English -->
+  <footer data-lang="en" style="display:none;">
+    <p>BMY Dental · Boston, Massachusetts · Full-Arch Implant & Reconstruction</p>
+  </footer>
 
+  <!-- Language toggle script -->
   <script>
     (function () {
-      const before = document.querySelector('.hero-image-before');
-      const after = document.querySelector('.hero-image-after');
+      const toggle = document.querySelector('[data-lang-toggle]');
+      const langEls = document.querySelectorAll('[data-lang]');
+      let current = 'zh'; // default view
 
-      if (!before || !after) return;
+      function applyLanguage(lang) {
+        langEls.forEach((el) => {
+          el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+        });
 
-      let showingAfter = false;
-
-      setInterval(() => {
-        showingAfter = !showingAfter;
-
-        if (showingAfter) {
-          before.style.opacity = '0';
-          after.style.opacity = '1';
-        } else {
-          before.style.opacity = '1';
-          after.style.opacity = '0';
+        // sync preferred_language select default
+        const select = document.getElementById('preferred_language');
+        if (select) {
+          select.value = lang;
         }
-      }, 4500);
+      }
+
+      applyLanguage(current);
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          current = current === 'zh' ? 'en' : 'zh';
+          applyLanguage(current);
+        });
+      }
     })();
   </script>
 
+  <!-- Supabase lead capture -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2.49.1/dist/umd/supabase.js"></script>
   <script>
     const SUPABASE_URL = 'https://mpyvzsfghxqppmaozcrb.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_frWVqQ-gQkmWp9Y0hrWlbw_PydxExjM';
@@ -419,17 +649,20 @@
 
         if (error) {
           console.error(error);
-          statusEl.textContent = '提交失败，请稍后重试 / Submission failed, please try again.';
+          statusEl.textContent =
+            '提交失败，请稍后重试 / Submission failed, please try again.';
           statusEl.style.color = '#b3261e';
         } else {
-          statusEl.textContent = '提交成功，我们会尽快与您联系 / Submitted successfully, we will contact you.';
+          statusEl.textContent =
+            '提交成功，我们会尽快与您联系 / Submitted successfully, we will contact you.';
           statusEl.style.color = '#0f5f5c';
           form.reset();
           document.getElementById('preferred_language').value = 'zh';
         }
       } catch (err) {
         console.error(err);
-        statusEl.textContent = '网络错误，请稍后重试 / Network error, please try again.';
+        statusEl.textContent =
+          '网络错误，请稍后重试 / Network error, please try again.';
         statusEl.style.color = '#b3261e';
       }
     });
