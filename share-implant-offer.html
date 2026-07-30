@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Send BMY Implant Offer</title>
+  <style>
+    :root {
+      --red: #8f171b;
+      --ink: #242424;
+      --muted: #686868;
+      --paper: #f6f1ec;
+      --white: #ffffff;
+      --border: #ddcec4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   "Noto Sans TC", Arial, sans-serif;
+    }
+    main {
+      width: min(680px, 100%);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 8px solid var(--red);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 14px 40px rgba(70, 40, 30, 0.10);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.55rem, 4vw, 2rem);
+    }
+    .intro {
+      margin: 0 0 20px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      background: var(--red);
+      color: var(--white);
+      font: inherit;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+    button:active { transform: translateY(1px); }
+    .status {
+      min-height: 24px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      text-align: center;
+    }
+    details {
+      margin-top: 22px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    pre {
+      margin: 14px 0 0;
+      padding: 16px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: #faf8f6;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font: inherit;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Send BMY Implant Offer</h1>
+    <p class="intro">
+      Tap the button, choose Messages, select the recipient, review the text,
+      and press Send.
+    </p>
+
+    <button id="shareButton" type="button">Send this offer by text</button>
+    <p id="status" class="status" aria-live="polite"></p>
+
+    <details>
+      <summary>Preview message</summary>
+      <pre>Hi, this is BMY (易保民牙醫). We’re offering 25% off our regular price for a single-tooth implant package.
+
+Learn more or request a consultation:
+https://bmybostondental-eng.github.io/?promo=implant25#contact
+
+您好，這裡是 BMY（易保民牙醫）。我們現正推出單顆植牙優惠，常規價格 75 折。
+
+了解詳情或預約諮詢：
+https://bmybostondental-eng.github.io/?promo=implant25#contact
+
+Reply STOP to opt out. 回覆 STOP 即可退訂。</pre>
+    </details>
+  </main>
+
+  <script>
+    const campaignText = 'Hi, this is BMY (易保民牙醫). We’re offering 25% off our regular price for a single-tooth implant package.\n\nLearn more or request a consultation:\nhttps://bmybostondental-eng.github.io/?promo=implant25#contact\n\n您好，這裡是 BMY（易保民牙醫）。我們現正推出單顆植牙優惠，常規價格 75 折。\n\n了解詳情或預約諮詢：\nhttps://bmybostondental-eng.github.io/?promo=implant25#contact\n\nReply STOP to opt out. 回覆 STOP 即可退訂。';
+    const shareButton = document.getElementById("shareButton");
+    const status = document.getElementById("status");
+
+    async function copyMessage() {
+      try {
+        await navigator.clipboard.writeText(campaignText);
+        status.textContent =
+          "Message copied. Open Messages, choose a recipient, and paste it.";
+      } catch (error) {
+        status.textContent =
+          "Your browser could not open sharing or copy automatically. " +
+          "Open the message preview and copy it manually.";
+      }
+    }
+
+    shareButton.addEventListener("click", async () => {
+      status.textContent = "";
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "BMY Implant Offer",
+            text: campaignText
+          });
+          status.textContent = "Share menu opened.";
+          return;
+        } catch (error) {
+          if (error && error.name === "AbortError") {
+            status.textContent = "Sharing canceled.";
+            return;
+          }
+        }
+      }
+
+      await copyMessage();
+    });
+  </script>
+</body>
+</html>
