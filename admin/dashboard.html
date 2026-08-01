@@ -15,7 +15,7 @@ button,.button-link{display:inline-flex;align-items:center;justify-content:cente
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:18px}.notice{display:none;margin-top:16px;padding:13px 15px;border-radius:10px;line-height:1.45}.notice.show{display:block}.notice.success{background:#e6f4eb;color:var(--ok)}.notice.error{background:#fbe8e8;color:var(--bad)}.notice.info{background:#edf3f8;color:var(--blue)}.notice.warning{background:#fff2cf;color:var(--warn)}
 .hidden{display:none!important}.divider{height:1px;background:var(--line);margin:28px 0}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.metric span{display:block;color:var(--muted);font-size:.88rem}.metric strong{display:block;margin-top:7px;font-size:1.18rem}.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:#f0e4df;color:var(--red2);font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em}
 .security{margin-top:24px;padding:15px;background:#faf6f3;border-left:4px solid var(--red);color:var(--muted)}
-.upload-box{padding:22px;border:2px dashed #cdbab0;border-radius:16px;background:#fffdfc}select,textarea{width:100%;padding:12px 14px;border:1px solid #baa99f;border-radius:11px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:170px;resize:vertical;line-height:1.5}select:focus,textarea:focus{outline:3px solid rgba(143,23,27,.16);border-color:var(--red)}.message-layout{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,2fr);gap:18px;margin:18px 0}.message-panel{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.message-panel label{display:block;margin-bottom:8px;font-weight:800}.simulation-table{min-width:900px}.simulated{color:var(--blue)}@media(max-width:760px){.message-layout{grid-template-columns:1fr}}.upload-box input[type=file]{display:block;width:100%;margin:14px 0;font:inherit}.confirm{display:flex;gap:10px;align-items:flex-start;margin-top:16px}.confirm input{margin-top:4px;transform:scale(1.15)}
+.upload-box{padding:22px;border:2px dashed #cdbab0;border-radius:16px;background:#fffdfc}select,textarea{width:100%;padding:12px 14px;border:1px solid #baa99f;border-radius:11px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:170px;resize:vertical;line-height:1.5}select:focus,textarea:focus{outline:3px solid rgba(143,23,27,.16);border-color:var(--red)}.message-layout{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,2fr);gap:18px;margin:18px 0}.message-panel{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.message-panel label{display:block;margin-bottom:8px;font-weight:800}.simulation-table{min-width:900px}.reply-layout{display:grid;grid-template-columns:minmax(240px,.85fr) minmax(0,1.5fr);gap:18px;margin:18px 0}.reply-panel{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.reply-panel label{display:block;margin:13px 0 7px;font-weight:800}.callback-table{min-width:1050px}.category-interested{color:var(--ok)}.category-stop{color:var(--bad)}.category-needs_review{color:var(--warn)}.category-not_interested{color:var(--muted)}@media(max-width:760px){.reply-layout{grid-template-columns:1fr}}.simulated{color:var(--blue)}@media(max-width:760px){.message-layout{grid-template-columns:1fr}}.upload-box input[type=file]{display:block;width:100%;margin:14px 0;font:inherit}.confirm{display:flex;gap:10px;align-items:flex-start;margin-top:16px}.confirm input{margin-top:4px;transform:scale(1.15)}
 .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:18px 0}.summary .metric{padding:13px}.summary .metric strong{font-size:1.35rem}
 .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:16px}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:11px 12px;border-bottom:1px solid #eadfd9;text-align:left;vertical-align:top;font-size:.9rem}th{position:sticky;top:0;background:#f4ebe6;color:#572124;z-index:1}tr:last-child td{border-bottom:0}.status{font-weight:800}.eligible{color:var(--ok)}.excluded{color:var(--bad)}.duplicate{color:var(--warn)}.invalid_phone{color:var(--bad)}
 code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem;color:var(--muted)}
@@ -158,6 +158,70 @@ code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem
       </section>
 
       <div class="divider"></div>
+
+      <section id="replySimulationSection">
+        <h2>Step 5 — Simulated replies and callback queue</h2>
+        <p>
+          Select a fictional test recipient and enter a reply such as
+          <code>YES</code>, <code>有興趣</code>, or <code>STOP</code>.
+          The system will classify the reply, simulate the appropriate acknowledgment,
+          and create a callback lead when interest is detected.
+        </p>
+
+        <div class="reply-layout">
+          <div class="reply-panel">
+            <label for="replyRecipient">Fictional recipient</label>
+            <select id="replyRecipient"></select>
+
+            <label for="replyText">Simulated incoming reply</label>
+            <textarea id="replyText" placeholder="Examples: YES, 有興趣, STOP"></textarea>
+
+            <div class="actions">
+              <button id="processReplyButton" type="button">Process simulated reply</button>
+              <button id="resetRepliesButton" class="secondary" type="button">Reset reply test</button>
+            </div>
+          </div>
+
+          <div class="reply-panel">
+            <label>Classification result</label>
+            <div id="classificationPreview" class="notice info show">
+              Enter a fictional reply to preview its classification.
+            </div>
+
+            <label for="autoReplyPreview">Automatic response preview</label>
+            <textarea id="autoReplyPreview" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="metric"><span>Incoming test replies</span><strong id="replyCount">0</strong></div>
+          <div class="metric"><span>Interested replies</span><strong id="interestedCount">0</strong></div>
+          <div class="metric"><span>New callback leads</span><strong id="callbackCount">0</strong></div>
+          <div class="metric"><span>Opt-outs</span><strong id="optOutCount">0</strong></div>
+          <div class="metric"><span>Needs review</span><strong id="reviewCount">0</strong></div>
+        </div>
+
+        <div id="replyNotice" class="notice" aria-live="polite"></div>
+
+        <h3>Callback queue</h3>
+        <div class="table-wrap">
+          <table class="callback-table">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Phone</th>
+                <th>Language</th>
+                <th>Incoming reply</th>
+                <th>Lead status</th>
+                <th>Received</th>
+              </tr>
+            </thead>
+            <tbody id="callbackBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="divider"></div>
       <div class="actions">
         <button id="refreshButton" class="secondary" type="button">Refresh dashboard</button>
         <button id="logoutButton" type="button">Sign out</button>
@@ -185,6 +249,8 @@ const MAX_TEST_ROWS=25;
 let currentCampaign=null;
 let analyzedRows=[];
 let simulationRecipients=[];
+let incomingReplies=[];
+let callbackLeads=[];
 
 const loading=document.getElementById("loading");
 const panel=document.getElementById("panel");
@@ -205,6 +271,14 @@ const simulateButton=document.getElementById("simulateButton");
 const resetSimulationButton=document.getElementById("resetSimulationButton");
 const simulationNotice=document.getElementById("simulationNotice");
 const simulationBody=document.getElementById("simulationBody");
+const replyRecipient=document.getElementById("replyRecipient");
+const replyText=document.getElementById("replyText");
+const processReplyButton=document.getElementById("processReplyButton");
+const resetRepliesButton=document.getElementById("resetRepliesButton");
+const classificationPreview=document.getElementById("classificationPreview");
+const autoReplyPreview=document.getElementById("autoReplyPreview");
+const replyNotice=document.getElementById("replyNotice");
+const callbackBody=document.getElementById("callbackBody");
 
 function notice(el,msg,type){el.textContent=msg;el.className=`notice show ${type}`}
 function clearNotice(el){el.textContent="";el.className="notice"}
@@ -251,6 +325,7 @@ async function loadDashboard(){
     if(countError)throw countError;
     document.getElementById("storedCount").textContent=String(count??0);
     await loadSimulationRecipients();
+    await loadReplyData();
 
     if(currentCampaign.send_mode!=="test"){
       notice(uploadNotice,"CSV test importing is disabled because this campaign is not in test mode.","error");
@@ -503,7 +578,7 @@ async function loadSimulationRecipients(){
 
   const{data,error}=await supabaseClient
     .from("sms_recipients")
-    .select("id,patient_reference,first_name,last_name,phone_e164,preferred_language,eligibility_status,exclusion_reason,send_status,sent_at,provider_message_id")
+    .select("id,patient_reference,first_name,last_name,phone_e164,preferred_language,marketing_consent,eligibility_status,exclusion_reason,send_status,sent_at,provider_message_id")
     .eq("campaign_id",currentCampaign.id)
     .order("created_at",{ascending:true});
 
@@ -717,6 +792,413 @@ async function resetSimulation(){
     resetSimulationButton.textContent="Reset simulation";
   }
 }
+
+
+const REPLY_MESSAGES = {
+  interested:
+    "Thank you for your interest in BMY’s implant offer. A member of our team will contact you soon.\n\n" +
+    "感謝您對 BMY 植牙優惠的興趣，我們的團隊將會儘快與您聯絡。",
+  stop:
+    "You have been unsubscribed from BMY promotional text messages. No further marketing texts will be sent.\n\n" +
+    "您已成功退訂 BMY 推廣簡訊，我們將不再向您發送行銷訊息。",
+  start:
+    "You have been resubscribed to BMY text messages.\n\n您已重新訂閱 BMY 簡訊。",
+  help:
+    "BMY Dental will have a team member assist you. You may also call the office at (617) 542-6263.\n\n" +
+    "BMY 牙醫團隊將為您提供協助，您也可以致電診所：(617) 542-6263。",
+  not_interested: "",
+  needs_review: ""
+};
+
+function normalizeReplyText(value){
+  return String(value||"")
+    .trim()
+    .toLowerCase()
+    .replace(/[！!。,.，?？]/g,"")
+    .replace(/\s+/g," ");
+}
+
+function classifyReply(value){
+  const normalized=normalizeReplyText(value);
+
+  const stopTerms=[
+    "stop","unsubscribe","cancel","end","quit",
+    "停止","退訂","退订","取消訂閱","取消订阅","不要再傳","不要再发"
+  ];
+  const startTerms=[
+    "start","unstop","subscribe","resume",
+    "開始","开始","重新訂閱","重新订阅"
+  ];
+  const helpTerms=["help","info","information","幫助","帮助","協助","协助"];
+  const interestedTerms=[
+    "yes","y","interested","call me","contact me","please call",
+    "有興趣","有兴趣","可以","請聯絡我","请联系我","聯絡我","联系我",
+    "想了解","我要了解","請打給我","请打给我"
+  ];
+  const notInterestedTerms=[
+    "no","n","not interested","no thanks",
+    "沒興趣","没兴趣","不需要","不用了"
+  ];
+
+  if(stopTerms.includes(normalized))return "stop";
+  if(startTerms.includes(normalized))return "start";
+  if(helpTerms.includes(normalized))return "help";
+  if(interestedTerms.includes(normalized))return "interested";
+  if(notInterestedTerms.includes(normalized))return "not_interested";
+  return "needs_review";
+}
+
+function previewReplyClassification(){
+  const body=replyText.value.trim();
+
+  if(!body){
+    classificationPreview.textContent="Enter a fictional reply to preview its classification.";
+    classificationPreview.className="notice info show";
+    autoReplyPreview.value="";
+    return;
+  }
+
+  const category=classifyReply(body);
+  classificationPreview.textContent="Classification: "+category.replace("_"," ");
+  classificationPreview.className=`notice show ${
+    category==="interested" ? "success" :
+    category==="stop" ? "error" :
+    category==="needs_review" ? "warning" : "info"
+  }`;
+
+  autoReplyPreview.value=REPLY_MESSAGES[category]||
+    "No automatic response will be sent. This reply will remain available for staff review.";
+}
+
+function populateReplyRecipients(){
+  const previouslySelected=replyRecipient.value;
+
+  replyRecipient.innerHTML=simulationRecipients.map(r=>{
+    const name=displayName(r);
+    return `<option value="${escapeHtml(r.id)}">${escapeHtml(name)} — ${escapeHtml(r.phone_e164)}</option>`;
+  }).join("");
+
+  if(previouslySelected&&simulationRecipients.some(r=>r.id===previouslySelected)){
+    replyRecipient.value=previouslySelected;
+  }
+}
+
+async function loadReplyData(){
+  if(!currentCampaign)return;
+
+  populateReplyRecipients();
+
+  const{data:replies,error:replyError}=await supabaseClient
+    .from("sms_incoming_replies")
+    .select("id,campaign_id,recipient_id,phone_e164,message_body,reply_category,preferred_language,auto_reply_sent,auto_reply_body,received_at")
+    .eq("campaign_id",currentCampaign.id)
+    .order("received_at",{ascending:false});
+
+  if(replyError)throw replyError;
+  incomingReplies=replies||[];
+
+  const{data:leads,error:leadError}=await supabaseClient
+    .from("sms_callback_leads")
+    .select("id,patient_name,phone_e164,preferred_language,incoming_message,lead_status,created_at")
+    .eq("campaign_id",currentCampaign.id)
+    .order("created_at",{ascending:false});
+
+  if(leadError)throw leadError;
+  callbackLeads=leads||[];
+
+  document.getElementById("replyCount").textContent=String(incomingReplies.length);
+  document.getElementById("interestedCount").textContent=String(
+    incomingReplies.filter(r=>r.reply_category==="interested").length
+  );
+  document.getElementById("callbackCount").textContent=String(callbackLeads.length);
+  document.getElementById("optOutCount").textContent=String(
+    incomingReplies.filter(r=>r.reply_category==="stop").length
+  );
+  document.getElementById("reviewCount").textContent=String(
+    incomingReplies.filter(r=>r.reply_category==="needs_review").length
+  );
+
+  callbackBody.innerHTML=callbackLeads.length
+    ? callbackLeads.map(lead=>`<tr>
+        <td>${escapeHtml(lead.patient_name||"—")}</td>
+        <td>${escapeHtml(lead.phone_e164)}</td>
+        <td>${escapeHtml(lead.preferred_language||"unknown")}</td>
+        <td>${escapeHtml(lead.incoming_message||"—")}</td>
+        <td class="status">${escapeHtml(lead.lead_status)}</td>
+        <td>${escapeHtml(new Date(lead.created_at).toLocaleString())}</td>
+      </tr>`).join("")
+    : `<tr><td colspan="6">No callback leads have been created yet.</td></tr>`;
+
+  processReplyButton.disabled =
+    currentCampaign.send_mode!=="test" || simulationRecipients.length===0;
+  resetRepliesButton.disabled =
+    currentCampaign.send_mode!=="test" ||
+    (incomingReplies.length===0&&callbackLeads.length===0);
+}
+
+async function processSimulatedReply(){
+  clearNotice(replyNotice);
+
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){
+    notice(replyNotice,"Reply simulation is available only in TEST mode.","error");
+    return;
+  }
+
+  const recipient=simulationRecipients.find(r=>r.id===replyRecipient.value);
+  const body=replyText.value.trim();
+
+  if(!recipient){
+    notice(replyNotice,"Select a fictional recipient.","error");
+    return;
+  }
+  if(!body){
+    notice(replyNotice,"Enter a fictional incoming reply.","error");
+    return;
+  }
+
+  const category=classifyReply(body);
+  const normalized=normalizeReplyText(body);
+  const autoReply=REPLY_MESSAGES[category]||"";
+  const inboundId="SIM-IN-"+crypto.randomUUID();
+  const now=new Date().toISOString();
+
+  processReplyButton.disabled=true;
+  processReplyButton.textContent="Processing…";
+
+  try{
+    const{data:replyRow,error:replyError}=await supabaseClient
+      .from("sms_incoming_replies")
+      .insert({
+        campaign_id:currentCampaign.id,
+        recipient_id:recipient.id,
+        phone_e164:recipient.phone_e164,
+        message_body:body,
+        normalized_body:normalized,
+        reply_category:category,
+        preferred_language:recipient.preferred_language,
+        provider_message_id:inboundId,
+        auto_reply_sent:Boolean(autoReply),
+        auto_reply_body:autoReply||null,
+        received_at:now
+      })
+      .select("id")
+      .single();
+
+    if(replyError)throw replyError;
+
+    if(category==="interested"){
+      const{data:existingLead,error:existingError}=await supabaseClient
+        .from("sms_callback_leads")
+        .select("id")
+        .eq("campaign_id",currentCampaign.id)
+        .eq("recipient_id",recipient.id)
+        .not("lead_status","in",`("completed","not_interested","wrong_number","do_not_contact")`)
+        .limit(1);
+
+      if(existingError)throw existingError;
+
+      if(!existingLead?.length){
+        const{error:leadError}=await supabaseClient
+          .from("sms_callback_leads")
+          .insert({
+            campaign_id:currentCampaign.id,
+            recipient_id:recipient.id,
+            reply_id:replyRow.id,
+            patient_name:displayName(recipient),
+            phone_e164:recipient.phone_e164,
+            preferred_language:recipient.preferred_language,
+            incoming_message:body,
+            lead_status:"new",
+            priority:"normal"
+          });
+
+        if(leadError)throw leadError;
+      }
+    }
+
+    if(category==="stop"){
+      const{error:suppressError}=await supabaseClient
+        .from("sms_suppression_list")
+        .upsert({
+          phone_e164:recipient.phone_e164,
+          reason:"opt_out",
+          source:"simulated_test_reply",
+          source_reply_id:replyRow.id,
+          suppressed_at:now,
+          notes:"Created during Step 5 fictional reply simulation"
+        },{onConflict:"phone_e164"});
+
+      if(suppressError)throw suppressError;
+
+      const{error:recipientError}=await supabaseClient
+        .from("sms_recipients")
+        .update({
+          opted_out:true,
+          eligibility_status:"excluded",
+          exclusion_reason:"Opted out through simulated reply",
+          send_status:"suppressed"
+        })
+        .eq("id",recipient.id);
+
+      if(recipientError)throw recipientError;
+    }
+
+    if(category==="start"){
+      const{error:deleteError}=await supabaseClient
+        .from("sms_suppression_list")
+        .delete()
+        .eq("phone_e164",recipient.phone_e164)
+        .eq("source","simulated_test_reply");
+
+      if(deleteError)throw deleteError;
+
+      const restoredEligibility=recipient.marketing_consent===false?"excluded":"eligible";
+      const{error:recipientError}=await supabaseClient
+        .from("sms_recipients")
+        .update({
+          opted_out:false,
+          eligibility_status:restoredEligibility,
+          exclusion_reason:restoredEligibility==="eligible"?null:"No documented marketing SMS consent",
+          send_status:restoredEligibility==="eligible"?"not_sent":"suppressed"
+        })
+        .eq("id",recipient.id);
+
+      if(recipientError)throw recipientError;
+    }
+
+    const eventRows=[{
+      campaign_id:currentCampaign.id,
+      recipient_id:recipient.id,
+      event_type:"test_reply_simulated",
+      event_data:{
+        incoming_message:body,
+        normalized_message:normalized,
+        reply_category:category,
+        simulated_inbound_id:inboundId,
+        actual_sms_received:false
+      }
+    }];
+
+    if(autoReply){
+      eventRows.push({
+        campaign_id:currentCampaign.id,
+        recipient_id:recipient.id,
+        event_type:"test_auto_reply_simulated",
+        event_data:{
+          reply_category:category,
+          auto_reply_body:autoReply,
+          actual_sms_sent:false
+        }
+      });
+    }
+
+    const{error:eventError}=await supabaseClient
+      .from("sms_event_log")
+      .insert(eventRows);
+
+    if(eventError)throw eventError;
+
+    notice(
+      replyNotice,
+      `Reply classified as ${category.replace("_"," ")}. ${
+        autoReply ? "The acknowledgment was simulated." : "No automatic acknowledgment was generated."
+      } No actual SMS was sent.`,
+      category==="interested"?"success":category==="stop"?"warning":"info"
+    );
+
+    replyText.value="";
+    previewReplyClassification();
+    await loadDashboard();
+  }catch(error){
+    notice(
+      replyNotice,
+      error.message||"The simulated reply could not be processed.",
+      "error"
+    );
+  }finally{
+    processReplyButton.textContent="Process simulated reply";
+  }
+}
+
+async function resetReplySimulation(){
+  clearNotice(replyNotice);
+
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){
+    notice(replyNotice,"Reset is available only in TEST mode.","error");
+    return;
+  }
+
+  if(!confirm(
+    "Delete all simulated replies, callback leads, and simulated opt-outs for this test campaign?"
+  ))return;
+
+  resetRepliesButton.disabled=true;
+  resetRepliesButton.textContent="Resetting…";
+
+  try{
+    const simulatedStopPhones=incomingReplies
+      .filter(r=>r.reply_category==="stop")
+      .map(r=>r.phone_e164);
+
+    const{error:leadError}=await supabaseClient
+      .from("sms_callback_leads")
+      .delete()
+      .eq("campaign_id",currentCampaign.id);
+    if(leadError)throw leadError;
+
+    const{error:replyError}=await supabaseClient
+      .from("sms_incoming_replies")
+      .delete()
+      .eq("campaign_id",currentCampaign.id);
+    if(replyError)throw replyError;
+
+    const{error:suppressionError}=await supabaseClient
+      .from("sms_suppression_list")
+      .delete()
+      .eq("source","simulated_test_reply");
+    if(suppressionError)throw suppressionError;
+
+    if(simulatedStopPhones.length){
+      const{error:restoreError}=await supabaseClient
+        .from("sms_recipients")
+        .update({
+          opted_out:false,
+          eligibility_status:"eligible",
+          exclusion_reason:null,
+          send_status:"sent"
+        })
+        .eq("campaign_id",currentCampaign.id)
+        .in("phone_e164",simulatedStopPhones)
+        .eq("marketing_consent",true);
+      if(restoreError)throw restoreError;
+    }
+
+    const{error:eventError}=await supabaseClient
+      .from("sms_event_log")
+      .delete()
+      .eq("campaign_id",currentCampaign.id)
+      .in("event_type",[
+        "test_reply_simulated",
+        "test_auto_reply_simulated"
+      ]);
+    if(eventError)throw eventError;
+
+    notice(replyNotice,"The simulated reply test was reset successfully.","success");
+    await loadDashboard();
+  }catch(error){
+    notice(
+      replyNotice,
+      error.message||"The simulated replies could not be reset.",
+      "error"
+    );
+  }finally{
+    resetRepliesButton.textContent="Reset reply test";
+  }
+}
+
+replyText.addEventListener("input",previewReplyClassification);
+processReplyButton.addEventListener("click",processSimulatedReply);
+resetRepliesButton.addEventListener("click",resetReplySimulation);
 
 messageStrategy.addEventListener("change",updateMessagePreview);
 simulateButton.addEventListener("click",simulateTestSend);
