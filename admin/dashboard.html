@@ -14,7 +14,7 @@ h1,h2,h3{margin-top:0}h1{font-size:clamp(1.7rem,4vw,2.45rem);margin-bottom:8px}p
 button,.button-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:0;border-radius:11px;padding:11px 18px;background:var(--red);color:#fff;font:inherit;font-weight:800;text-decoration:none;cursor:pointer}button:hover,.button-link:hover{background:var(--red2)}button.secondary,.button-link.secondary{background:#eee6e1;color:var(--red2)}button.danger{background:#8c2424}button:disabled{opacity:.55;cursor:not-allowed}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:18px}.notice{display:none;margin-top:16px;padding:13px 15px;border-radius:10px;line-height:1.45}.notice.show{display:block}.notice.success{background:#e6f4eb;color:var(--ok)}.notice.error{background:#fbe8e8;color:var(--bad)}.notice.info{background:#edf3f8;color:var(--blue)}.notice.warning{background:#fff2cf;color:var(--warn)}
 .hidden{display:none!important}.divider{height:1px;background:var(--line);margin:28px 0}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.metric span{display:block;color:var(--muted);font-size:.88rem}.metric strong{display:block;margin-top:7px;font-size:1.18rem}.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:#f0e4df;color:var(--red2);font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em}
-.security{margin-top:24px;padding:15px;background:#faf6f3;border-left:4px solid var(--red);color:var(--muted)}
+.security{margin-top:24px;padding:15px;background:#faf6f3;border-left:4px solid var(--red);color:var(--muted)}.safety-console{border:2px solid #cdbab0;border-radius:18px;padding:22px;background:linear-gradient(180deg,#fffdfc,#faf5f1);margin:26px 0}.safety-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}.mode-banner{padding:9px 13px;border-radius:999px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}.mode-test{background:#edf3f8;color:var(--blue)}.mode-live{background:#fbe8e8;color:var(--bad)}.safety-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}.safety-controls label{display:block;margin-bottom:7px;font-weight:800}.safety-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.safety-check{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:11px;background:#fff}.safety-icon{font-weight:900;min-width:22px;text-align:center}.safety-pass .safety-icon{color:var(--ok)}.safety-fail .safety-icon{color:var(--bad)}.safety-warn .safety-icon{color:var(--warn)}.fingerprint{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.82rem;word-break:break-all;background:#f4eeea;padding:9px;border-radius:8px}.locked-live{padding:14px;border-radius:11px;background:#fbe8e8;color:var(--bad);font-weight:800;margin-top:16px}@media(max-width:760px){.safety-controls,.safety-results{grid-template-columns:1fr}}
 .upload-box{padding:22px;border:2px dashed #cdbab0;border-radius:16px;background:#fffdfc}select,textarea{width:100%;padding:12px 14px;border:1px solid #baa99f;border-radius:11px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:170px;resize:vertical;line-height:1.5}select:focus,textarea:focus{outline:3px solid rgba(143,23,27,.16);border-color:var(--red)}.message-layout{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,2fr);gap:18px;margin:18px 0}.message-panel{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.message-panel label{display:block;margin-bottom:8px;font-weight:800}.simulation-table{min-width:900px}.reply-layout{display:grid;grid-template-columns:minmax(240px,.85fr) minmax(0,1.5fr);gap:18px;margin:18px 0}.reply-panel{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.reply-panel label{display:block;margin:13px 0 7px;font-weight:800}.callback-table{min-width:1180px}.lead-actions{display:flex;flex-wrap:wrap;gap:7px}.mini-button{min-height:34px;padding:7px 10px;border-radius:8px;font-size:.83rem}.call-link{background:#176b3a;color:#fff}.call-link:hover{background:#0f522c}.lead-editor{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:14px;background:#fffdfc}.lead-editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.lead-editor-grid .full{grid-column:1/-1}.filter-row{display:grid;grid-template-columns:minmax(200px,.8fr) minmax(200px,.8fr) auto;gap:12px;align-items:end;margin:18px 0}.filter-row label{display:block;margin-bottom:7px;font-weight:800}.nowrap{white-space:nowrap}@media(max-width:760px){.lead-editor-grid,.filter-row{grid-template-columns:1fr}.lead-editor-grid .full{grid-column:auto}}.category-interested{color:var(--ok)}.category-stop{color:var(--bad)}.category-needs_review{color:var(--warn)}.category-not_interested{color:var(--muted)}@media(max-width:760px){.reply-layout{grid-template-columns:1fr}}.simulated{color:var(--blue)}@media(max-width:760px){.message-layout{grid-template-columns:1fr}}.upload-box input[type=file]{display:block;width:100%;margin:14px 0;font:inherit}.confirm{display:flex;gap:10px;align-items:flex-start;margin-top:16px}.confirm input{margin-top:4px;transform:scale(1.15)}
 .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:18px 0}.summary .metric{padding:13px}.summary .metric strong{font-size:1.35rem}
 .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:16px}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:11px 12px;border-bottom:1px solid #eadfd9;text-align:left;vertical-align:top;font-size:.9rem}th{position:sticky;top:0;background:#f4ebe6;color:#572124;z-index:1}tr:last-child td{border-bottom:0}.status{font-weight:800}.eligible{color:var(--ok)}.excluded{color:var(--bad)}.duplicate{color:var(--warn)}.invalid_phone{color:var(--bad)}
@@ -41,6 +41,68 @@ code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem
       </div>
 
       <div id="dashboardNotice" class="notice" aria-live="polite"></div>
+
+      <section class="safety-console" id="safetyConsole">
+        <div class="safety-header">
+          <div>
+            <h2>Step 8 — Production safety console</h2>
+            <p class="lead">
+              Run a documented preflight before any future live campaign. This screen
+              cannot send SMS or enable live mode.
+            </p>
+          </div>
+          <span id="safetyModeBanner" class="mode-banner mode-test">TEST LOCKED</span>
+        </div>
+
+        <div class="summary">
+          <div class="metric"><span>Approval status</span><strong id="approvalStatus">—</strong></div>
+          <div class="metric"><span>Live send enabled</span><strong id="liveEnabled">false</strong></div>
+          <div class="metric"><span>Eligible recipients</span><strong id="safetyEligible">0</strong></div>
+          <div class="metric"><span>Estimated SMS segments</span><strong id="estimatedSegments">0</strong></div>
+          <div class="metric"><span>Preflight completed</span><strong id="preflightTime">Not yet</strong></div>
+        </div>
+
+        <div class="safety-controls">
+          <div>
+            <label for="maxBatchSize">Maximum batch size</label>
+            <input id="maxBatchSize" type="number" min="1" max="1000" step="1">
+            <p class="small">Maximum recipients released in one future send batch.</p>
+          </div>
+          <div>
+            <label for="dailySendLimit">Daily send limit</label>
+            <input id="dailySendLimit" type="number" min="1" max="100000" step="1">
+            <p class="small">Hard daily ceiling before a future live provider is connected.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="saveSafetyLimitsButton" class="secondary" type="button">
+            Save safety limits
+          </button>
+          <button id="runPreflightButton" type="button">
+            Run production preflight
+          </button>
+        </div>
+
+        <div id="safetyNotice" class="notice" aria-live="polite"></div>
+
+        <div id="safetyResults" class="safety-results">
+          <div class="safety-check safety-warn">
+            <span class="safety-icon">•</span>
+            <div><strong>Preflight not run</strong><br><span class="small">Run the safety check after reviewing the campaign.</span></div>
+          </div>
+        </div>
+
+        <div id="fingerprintPanel" class="hidden">
+          <h3>Campaign fingerprint</h3>
+          <div id="campaignFingerprint" class="fingerprint"></div>
+        </div>
+
+        <div class="locked-live">
+          LIVE sending remains disabled. Twilio credentials and a second final approval
+          checkpoint will be required later.
+        </div>
+      </section>
 
       <div class="divider"></div>
 
@@ -229,7 +291,7 @@ code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem
           </div>
 
           <button id="exportCallbackButton" class="secondary" type="button">
-            Export callback CSV
+            Export callback Excel
           </button>
         </div>
 
@@ -337,6 +399,7 @@ code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem
   </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
@@ -353,6 +416,8 @@ let analyzedRows=[];
 let simulationRecipients=[];
 let incomingReplies=[];
 let callbackLeads=[];
+let currentAuth=null;
+let lastPreflightChecks=[];
 
 const loading=document.getElementById("loading");
 const panel=document.getElementById("panel");
@@ -397,6 +462,20 @@ const saveLeadButton=document.getElementById("saveLeadButton");
 const markCalledButton=document.getElementById("markCalledButton");
 const closeLeadEditorButton=document.getElementById("closeLeadEditorButton");
 const leadEditorNotice=document.getElementById("leadEditorNotice");
+const approvalStatus=document.getElementById("approvalStatus");
+const liveEnabled=document.getElementById("liveEnabled");
+const safetyEligible=document.getElementById("safetyEligible");
+const estimatedSegments=document.getElementById("estimatedSegments");
+const preflightTime=document.getElementById("preflightTime");
+const maxBatchSize=document.getElementById("maxBatchSize");
+const dailySendLimit=document.getElementById("dailySendLimit");
+const saveSafetyLimitsButton=document.getElementById("saveSafetyLimitsButton");
+const runPreflightButton=document.getElementById("runPreflightButton");
+const safetyNotice=document.getElementById("safetyNotice");
+const safetyResults=document.getElementById("safetyResults");
+const safetyModeBanner=document.getElementById("safetyModeBanner");
+const fingerprintPanel=document.getElementById("fingerprintPanel");
+const campaignFingerprint=document.getElementById("campaignFingerprint");
 
 function notice(el,msg,type){el.textContent=msg;el.className=`notice show ${type}`}
 function clearNotice(el){el.textContent="";el.className="notice"}
@@ -420,12 +499,13 @@ async function loadDashboard(){
   refreshButton.disabled=true;
   try{
     const auth=await requireAdmin(); if(!auth)return;
+    currentAuth=auth;
     document.getElementById("name").textContent=auth.profile.full_name||auth.session.user.email;
     document.getElementById("role").textContent=auth.profile.role;
 
     const{data:campaigns,error}=await supabaseClient
       .from("sms_campaigns")
-      .select("id,name,status,send_mode,created_at,message_english,message_chinese,message_bilingual")
+      .select("id,name,status,send_mode,created_at,message_english,message_chinese,message_bilingual,landing_page_url,media_url,approval_status,approval_statement,approved_by,approved_at,live_send_enabled,max_batch_size,daily_send_limit,preflight_completed_at,preflight_snapshot,campaign_fingerprint,last_live_send_at")
       .order("created_at",{ascending:false})
       .limit(1);
     if(error)throw error;
@@ -444,6 +524,7 @@ async function loadDashboard(){
     document.getElementById("storedCount").textContent=String(count??0);
     await loadSimulationRecipients();
     await loadReplyData();
+    renderSafetyConsole();
 
     if(currentCampaign.send_mode!=="test"){
       notice(uploadNotice,"CSV test importing is disabled because this campaign is not in test mode.","error");
@@ -458,6 +539,409 @@ async function loadDashboard(){
     notice(dashboardNotice,e.message||"Unable to load the dashboard.","error");
   }finally{refreshButton.disabled=false}
 }
+
+
+function smsSegmentInfo(text){
+  const value=String(text||"");
+  if(!value)return {encoding:"empty",characters:0,segments:0};
+
+  // Conservative GSM-7 test. Anything outside this set is treated as Unicode.
+  const gsm7=/^[\r\n @£$¥èéùìòÇØøÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ!"#¤%&'()*+,\-.\/0-9:;<=>?¡A-ZÄÖÑÜ§¿a-zäöñüà^{}\\[~\]|€]*$/;
+  const isGsm=gsm7.test(value);
+  const singleLimit=isGsm?160:70;
+  const concatLimit=isGsm?153:67;
+  const segments=value.length<=singleLimit
+    ? 1
+    : Math.ceil(value.length/concatLimit);
+
+  return {
+    encoding:isGsm?"GSM-7":"Unicode",
+    characters:value.length,
+    segments
+  };
+}
+
+function campaignMessageForRecipient(recipient){
+  if(recipient.preferred_language==="english"){
+    return {version:"english",text:currentCampaign.message_english||""};
+  }
+  if(recipient.preferred_language==="chinese"){
+    return {version:"chinese",text:currentCampaign.message_chinese||""};
+  }
+  return {version:"bilingual",text:currentCampaign.message_bilingual||""};
+}
+
+function estimatedCampaignSegments(){
+  return simulationRecipients
+    .filter(r=>r.eligibility_status==="eligible")
+    .reduce((sum,recipient)=>{
+      const message=campaignMessageForRecipient(recipient);
+      return sum+smsSegmentInfo(message.text).segments;
+    },0);
+}
+
+function renderSafetyConsole(){
+  if(!currentCampaign)return;
+
+  const eligible=simulationRecipients.filter(
+    r=>r.eligibility_status==="eligible"
+  ).length;
+
+  approvalStatus.textContent=currentCampaign.approval_status||"not_ready";
+  liveEnabled.textContent=String(Boolean(currentCampaign.live_send_enabled));
+  safetyEligible.textContent=String(eligible);
+  estimatedSegments.textContent=String(estimatedCampaignSegments());
+  maxBatchSize.value=String(currentCampaign.max_batch_size||100);
+  dailySendLimit.value=String(currentCampaign.daily_send_limit||1000);
+  preflightTime.textContent=currentCampaign.preflight_completed_at
+    ? new Date(currentCampaign.preflight_completed_at).toLocaleString()
+    : "Not yet";
+
+  safetyModeBanner.textContent=
+    currentCampaign.send_mode==="live"?"LIVE MODE":"TEST LOCKED";
+  safetyModeBanner.className=
+    "mode-banner "+(currentCampaign.send_mode==="live"?"mode-live":"mode-test");
+
+  if(currentCampaign.campaign_fingerprint){
+    campaignFingerprint.textContent=currentCampaign.campaign_fingerprint;
+    fingerprintPanel.classList.remove("hidden");
+  }else{
+    campaignFingerprint.textContent="";
+    fingerprintPanel.classList.add("hidden");
+  }
+
+  if(currentCampaign.preflight_snapshot?.checks){
+    renderSafetyChecks(currentCampaign.preflight_snapshot.checks);
+  }
+}
+
+function renderSafetyChecks(checks){
+  lastPreflightChecks=checks||[];
+
+  safetyResults.innerHTML=lastPreflightChecks.map(check=>{
+    const className=check.status==="pass"
+      ? "safety-pass"
+      : check.status==="fail"
+        ? "safety-fail"
+        : "safety-warn";
+    const icon=check.status==="pass"?"✓":check.status==="fail"?"✕":"!";
+    return `<div class="safety-check ${className}">
+      <span class="safety-icon">${icon}</span>
+      <div>
+        <strong>${escapeHtml(check.label)}</strong><br>
+        <span class="small">${escapeHtml(check.detail||"")}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+async function sha256Hex(value){
+  const bytes=new TextEncoder().encode(value);
+  const digest=await crypto.subtle.digest("SHA-256",bytes);
+  return Array.from(new Uint8Array(digest))
+    .map(byte=>byte.toString(16).padStart(2,"0"))
+    .join("");
+}
+
+async function buildCampaignFingerprint(){
+  const eligiblePhones=simulationRecipients
+    .filter(r=>r.eligibility_status==="eligible")
+    .map(r=>r.phone_e164)
+    .sort();
+
+  const canonical=JSON.stringify({
+    name:currentCampaign.name,
+    messages:{
+      english:currentCampaign.message_english||"",
+      chinese:currentCampaign.message_chinese||"",
+      bilingual:currentCampaign.message_bilingual||""
+    },
+    landing_page_url:currentCampaign.landing_page_url||"",
+    media_url:currentCampaign.media_url||"",
+    eligible_phones:eligiblePhones
+  });
+
+  return await sha256Hex(canonical);
+}
+
+async function saveSafetyLimits(){
+  clearNotice(safetyNotice);
+
+  const batch=Number.parseInt(maxBatchSize.value,10);
+  const daily=Number.parseInt(dailySendLimit.value,10);
+
+  if(!Number.isInteger(batch)||batch<1||batch>1000){
+    notice(safetyNotice,"Maximum batch size must be between 1 and 1,000.","error");
+    return;
+  }
+  if(!Number.isInteger(daily)||daily<1||daily>100000){
+    notice(safetyNotice,"Daily send limit must be between 1 and 100,000.","error");
+    return;
+  }
+  if(batch>daily){
+    notice(safetyNotice,"Maximum batch size cannot exceed the daily send limit.","error");
+    return;
+  }
+
+  saveSafetyLimitsButton.disabled=true;
+  saveSafetyLimitsButton.textContent="Saving…";
+
+  try{
+    const{error}=await supabaseClient
+      .from("sms_campaigns")
+      .update({
+        max_batch_size:batch,
+        daily_send_limit:daily
+      })
+      .eq("id",currentCampaign.id);
+
+    if(error)throw error;
+
+    notice(
+      safetyNotice,
+      "Safety limits saved. Any prior final approval would be revoked after a material change.",
+      "success"
+    );
+    await loadDashboard();
+  }catch(error){
+    notice(
+      safetyNotice,
+      error.message||"Unable to save the safety limits.",
+      "error"
+    );
+  }finally{
+    saveSafetyLimitsButton.disabled=false;
+    saveSafetyLimitsButton.textContent="Save safety limits";
+  }
+}
+
+async function runProductionPreflight(){
+  clearNotice(safetyNotice);
+  runPreflightButton.disabled=true;
+  runPreflightButton.textContent="Running preflight…";
+
+  try{
+    const eligible=simulationRecipients.filter(
+      r=>r.eligibility_status==="eligible"
+    );
+    const excluded=simulationRecipients.filter(
+      r=>r.eligibility_status!=="eligible"
+    );
+
+    const eligiblePhones=eligible.map(r=>r.phone_e164);
+    const suppressed=new Set();
+
+    for(let i=0;i<eligiblePhones.length;i+=100){
+      const chunk=eligiblePhones.slice(i,i+100);
+      if(!chunk.length)continue;
+
+      const{data,error}=await supabaseClient
+        .from("sms_suppression_list")
+        .select("phone_e164")
+        .in("phone_e164",chunk);
+
+      if(error)throw error;
+      (data||[]).forEach(item=>suppressed.add(item.phone_e164));
+    }
+
+    const{count:sentNotificationCount,error:notificationError}=
+      await supabaseClient
+        .from("sms_callback_leads")
+        .select("id",{count:"exact",head:true})
+        .eq("campaign_id",currentCampaign.id)
+        .eq("notification_email_status","sent");
+
+    if(notificationError)throw notificationError;
+
+    const fingerprint=await buildCampaignFingerprint();
+
+    const{data:duplicates,error:duplicateError}=await supabaseClient
+      .from("sms_campaigns")
+      .select("id,name,status,created_at")
+      .eq("campaign_fingerprint",fingerprint)
+      .neq("id",currentCampaign.id)
+      .limit(10);
+
+    if(duplicateError)throw duplicateError;
+
+    const englishInfo=smsSegmentInfo(currentCampaign.message_english);
+    const chineseInfo=smsSegmentInfo(currentCampaign.message_chinese);
+    const bilingualInfo=smsSegmentInfo(currentCampaign.message_bilingual);
+
+    const checks=[
+      {
+        key:"test_mode",
+        label:"Campaign remains locked in TEST mode",
+        detail:`Current mode: ${currentCampaign.send_mode}`,
+        status:currentCampaign.send_mode==="test"?"pass":"fail"
+      },
+      {
+        key:"live_disabled",
+        label:"Live sending is disabled",
+        detail:`live_send_enabled = ${Boolean(currentCampaign.live_send_enabled)}`,
+        status:currentCampaign.live_send_enabled===false?"pass":"fail"
+      },
+      {
+        key:"eligible_present",
+        label:"Eligible recipient set is not empty",
+        detail:`${eligible.length} eligible and ${excluded.length} excluded recipient(s) stored`,
+        status:eligible.length>0?"pass":"fail"
+      },
+      {
+        key:"consent",
+        label:"All eligible recipients have documented consent",
+        detail:`${eligible.filter(r=>r.marketing_consent!==true).length} eligible recipient(s) without consent`,
+        status:eligible.every(r=>r.marketing_consent===true)?"pass":"fail"
+      },
+      {
+        key:"opt_out",
+        label:"No eligible recipient is marked opted out",
+        detail:`${eligible.filter(r=>r.opted_out===true).length} eligible opted-out recipient(s)`,
+        status:eligible.every(r=>r.opted_out!==true)?"pass":"fail"
+      },
+      {
+        key:"suppression",
+        label:"Eligible list is clear of the permanent suppression table",
+        detail:`${suppressed.size} eligible suppression-list match(es)`,
+        status:suppressed.size===0?"pass":"fail"
+      },
+      {
+        key:"link",
+        label:"Campaign landing-page link is present",
+        detail:currentCampaign.landing_page_url||"No landing-page URL",
+        status:Boolean(currentCampaign.landing_page_url)?"pass":"fail"
+      },
+      {
+        key:"stop_language",
+        label:"All message versions contain STOP instructions",
+        detail:"English, Chinese, and bilingual templates checked",
+        status:[
+          currentCampaign.message_english,
+          currentCampaign.message_chinese,
+          currentCampaign.message_bilingual
+        ].every(message=>/\bSTOP\b/i.test(String(message||"")))?"pass":"fail"
+      },
+      {
+        key:"limits",
+        label:"Batch and daily limits are internally consistent",
+        detail:`Batch ${currentCampaign.max_batch_size}; daily ${currentCampaign.daily_send_limit}`,
+        status:
+          currentCampaign.max_batch_size>=1 &&
+          currentCampaign.max_batch_size<=currentCampaign.daily_send_limit
+            ?"pass":"fail"
+      },
+      {
+        key:"notification",
+        label:"Internal callback email notification was tested",
+        detail:`${sentNotificationCount||0} successful notification email(s) recorded`,
+        status:(sentNotificationCount||0)>0?"pass":"fail"
+      },
+      {
+        key:"duplicate",
+        label:"No matching campaign fingerprint was found",
+        detail:duplicates?.length
+          ? `${duplicates.length} matching campaign(s) found`
+          : "No other campaign has the same content and eligible recipient set",
+        status:duplicates?.length?"fail":"pass"
+      },
+      {
+        key:"segment_estimate",
+        label:"Estimated SMS segment count calculated",
+        detail:
+          `English ${englishInfo.segments} (${englishInfo.encoding}); `+
+          `Chinese ${chineseInfo.segments} (${chineseInfo.encoding}); `+
+          `Bilingual ${bilingualInfo.segments} (${bilingualInfo.encoding}); `+
+          `campaign total ${estimatedCampaignSegments()}`,
+        status:"pass"
+      }
+    ];
+
+    const failedChecks=checks.filter(check=>check.status==="fail");
+    const now=new Date().toISOString();
+
+    const snapshot={
+      generated_at:now,
+      generated_by:currentAuth?.session?.user?.id||null,
+      eligible_recipients:eligible.length,
+      excluded_recipients:excluded.length,
+      estimated_segments:estimatedCampaignSegments(),
+      max_batch_size:currentCampaign.max_batch_size,
+      daily_send_limit:currentCampaign.daily_send_limit,
+      successful_notification_tests:sentNotificationCount||0,
+      duplicate_campaigns:duplicates||[],
+      message_segments:{
+        english:englishInfo,
+        chinese:chineseInfo,
+        bilingual:bilingualInfo
+      },
+      checks
+    };
+
+    const nextApprovalStatus=failedChecks.length
+      ? "not_ready"
+      : "ready_for_review";
+
+    const{error:updateError}=await supabaseClient
+      .from("sms_campaigns")
+      .update({
+        approval_status:nextApprovalStatus,
+        approval_statement:null,
+        approved_by:null,
+        approved_at:null,
+        live_send_enabled:false,
+        preflight_completed_at:now,
+        preflight_snapshot:snapshot,
+        campaign_fingerprint:fingerprint
+      })
+      .eq("id",currentCampaign.id);
+
+    if(updateError)throw updateError;
+
+    const{error:logError}=await supabaseClient
+      .from("sms_event_log")
+      .insert({
+        campaign_id:currentCampaign.id,
+        event_type:"production_preflight_completed",
+        event_data:{
+          approval_status:nextApprovalStatus,
+          failed_check_count:failedChecks.length,
+          eligible_recipients:eligible.length,
+          estimated_segments:estimatedCampaignSegments(),
+          campaign_fingerprint:fingerprint,
+          live_send_enabled:false
+        },
+        created_by:currentAuth?.session?.user?.id||null
+      });
+
+    if(logError)throw logError;
+
+    renderSafetyChecks(checks);
+    campaignFingerprint.textContent=fingerprint;
+    fingerprintPanel.classList.remove("hidden");
+
+    notice(
+      safetyNotice,
+      failedChecks.length
+        ? `Preflight completed with ${failedChecks.length} failed check(s). Campaign remains not ready.`
+        : "Preflight passed. Campaign is ready for review, but LIVE sending remains disabled.",
+      failedChecks.length?"error":"success"
+    );
+
+    await loadDashboard();
+  }catch(error){
+    notice(
+      safetyNotice,
+      error.message||"The production preflight could not be completed.",
+      "error"
+    );
+  }finally{
+    runPreflightButton.disabled=false;
+    runPreflightButton.textContent="Run production preflight";
+  }
+}
+
+saveSafetyLimitsButton.addEventListener("click",saveSafetyLimits);
+runPreflightButton.addEventListener("click",runProductionPreflight);
 
 function parseCSV(text){
   const rows=[]; let row=[]; let field=""; let quoted=false;
@@ -696,7 +1180,7 @@ async function loadSimulationRecipients(){
 
   const{data,error}=await supabaseClient
     .from("sms_recipients")
-    .select("id,patient_reference,first_name,last_name,phone_e164,preferred_language,marketing_consent,eligibility_status,exclusion_reason,send_status,sent_at,provider_message_id")
+    .select("id,patient_reference,first_name,last_name,phone_e164,preferred_language,marketing_consent,opted_out,eligibility_status,exclusion_reason,send_status,sent_at,provider_message_id")
     .eq("campaign_id",currentCampaign.id)
     .order("created_at",{ascending:true});
 
@@ -1491,12 +1975,8 @@ async function markCallbackCalledNow(){
   await saveCallbackLead();
 }
 
-function csvEscape(value){
-  const text=String(value??"");
-  return `"${text.replace(/"/g,'""')}"`;
-}
 
-function exportCallbackCSV(){
+function exportCallbackExcel(){
   const leads=filteredCallbackLeads();
 
   if(!leads.length){
@@ -1504,59 +1984,77 @@ function exportCallbackCSV(){
     return;
   }
 
-  const headers=[
-    "patient_name",
-    "phone",
-    "preferred_language",
-    "incoming_reply",
-    "lead_status",
-    "priority",
-    "last_contacted_at",
-    "appointment_datetime",
-    "staff_notes",
-    "created_at"
-  ];
-
-  const lines=[headers.map(csvEscape).join(",")];
-
-  for(const lead of leads){
-    lines.push([
-      lead.patient_name,
-      lead.phone_e164,
-      lead.preferred_language,
-      lead.incoming_message,
-      lead.lead_status,
-      lead.priority,
-      lead.last_contacted_at,
-      lead.appointment_datetime,
-      lead.staff_notes,
-      lead.created_at
-    ].map(csvEscape).join(","));
+  if(typeof XLSX==="undefined"){
+    notice(
+      replyNotice,
+      "The Excel export library did not load. Refresh the page and try again.",
+      "error"
+    );
+    return;
   }
 
-  const blob=new Blob(
-    ["\ufeff"+lines.join("\r\n")],
-    {type:"text/csv;charset=utf-8"}
+  const rows=leads.map(lead=>({
+    "Patient Name": lead.patient_name||"",
+    "Phone": lead.phone_e164||"",
+    "Preferred Language": lead.preferred_language||"",
+    "Incoming Reply": lead.incoming_message||"",
+    "Lead Status": lead.lead_status||"",
+    "Priority": lead.priority||"",
+    "Last Contacted": lead.last_contacted_at
+      ? new Date(lead.last_contacted_at).toLocaleString()
+      : "",
+    "Appointment": lead.appointment_datetime
+      ? new Date(lead.appointment_datetime).toLocaleString()
+      : "",
+    "Staff Notes": lead.staff_notes||"",
+    "Lead Created": lead.created_at
+      ? new Date(lead.created_at).toLocaleString()
+      : ""
+  }));
+
+  const worksheet=XLSX.utils.json_to_sheet(rows);
+
+  // Preserve phone numbers as text so Excel does not display scientific notation.
+  const phoneColumnIndex=1;
+  for(let rowIndex=2;rowIndex<=rows.length+1;rowIndex++){
+    const cellAddress=XLSX.utils.encode_cell({r:rowIndex-1,c:phoneColumnIndex});
+    if(worksheet[cellAddress]){
+      worksheet[cellAddress].t="s";
+      worksheet[cellAddress].z="@";
+    }
+  }
+
+  worksheet["!cols"]=[
+    {wch:22},
+    {wch:18},
+    {wch:21},
+    {wch:22},
+    {wch:18},
+    {wch:12},
+    {wch:22},
+    {wch:22},
+    {wch:48},
+    {wch:22}
+  ];
+
+  const workbook=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook,worksheet,"Callback List");
+
+  XLSX.writeFile(
+    workbook,
+    `BMY-callback-list-${new Date().toISOString().slice(0,10)}.xlsx`
   );
-  const url=URL.createObjectURL(blob);
-  const link=document.createElement("a");
-  link.href=url;
-  link.download=`BMY-callback-list-${new Date().toISOString().slice(0,10)}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
 
   notice(
     replyNotice,
-    `${leads.length} callback lead(s) exported to CSV.`,
+    `${leads.length} callback lead(s) exported to Excel with phone numbers preserved as text.`,
     "success"
   );
 }
 
 leadStatusFilter.addEventListener("change",renderCallbackQueue);
 leadSearch.addEventListener("input",renderCallbackQueue);
-exportCallbackButton.addEventListener("click",exportCallbackCSV);
+exportCallbackButton.addEventListener("click",exportCallbackExcel);
 saveLeadButton.addEventListener("click",saveCallbackLead);
 markCalledButton.addEventListener("click",markCallbackCalledNow);
 closeLeadEditorButton.addEventListener("click",closeLeadEditor);
