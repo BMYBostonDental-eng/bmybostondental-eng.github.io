@@ -1,0 +1,7 @@
+patient_reference,first_name,last_name,phone,preferred_language,marketing_consent,consent_timestamp,opted_out
+TEST-001,Amy,Wong,+16175550101,chinese,yes,2026-07-01,no
+TEST-002,John,Lee,6175550102,english,yes,2026-07-02,no
+TEST-003,Mei,Chan,6175550103,chinese,no,,no
+TEST-004,David,Lin,not-a-number,bilingual,yes,2026-07-03,no
+TEST-005,Amy Duplicate,Wong,+16175550101,chinese,yes,2026-07-01,no
+TEST-006,Former Patient,Test,+16175550106,unknown,yes,2026-07-04,yes

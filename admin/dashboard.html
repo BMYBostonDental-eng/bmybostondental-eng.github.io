@@ -1,29 +1,396 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>BMY Campaign Dashboard</title><style>
-:root{--red:#8f171b;--red2:#681014;--ink:#242424;--muted:#6d6662;--paper:#f6f1ec;--white:#fff;--line:#dfd0c7;--ok:#176b3a;--bad:#a12020}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BMY Campaign Dashboard</title>
+<style>
+:root{--red:#8f171b;--red2:#681014;--ink:#242424;--muted:#6d6662;--paper:#f6f1ec;--white:#fff;--line:#dfd0c7;--ok:#176b3a;--bad:#a12020;--warn:#8a5b00;--blue:#285f8f}
 *{box-sizing:border-box}html{color-scheme:light}body{margin:0;min-height:100vh;padding:24px;background:radial-gradient(circle at top left,rgba(143,23,27,.08),transparent 34%),var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",Arial,sans-serif}
-.shell{width:min(760px,100%);margin:5vh auto}.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}.mark{width:36px;height:36px;border:10px solid var(--red);border-radius:50%}.brand strong{font-size:1.35rem}.brand span{display:block;color:var(--muted);font-size:.9rem}
-.card{background:var(--white);border:1px solid var(--line);border-top:8px solid var(--red);border-radius:22px;padding:clamp(22px,5vw,38px);box-shadow:0 18px 50px rgba(70,42,30,.11)}
-h1,h2{margin-top:0}h1{font-size:clamp(1.7rem,5vw,2.45rem);margin-bottom:8px}p{line-height:1.55}.lead{color:var(--muted);margin-top:0}
-label{display:block;margin:18px 0 7px;font-weight:700}input{width:100%;padding:14px 15px;border:1px solid #baa99f;border-radius:11px;background:#fff;color:var(--ink);font:inherit}input:focus{outline:3px solid rgba(143,23,27,.16);border-color:var(--red)}
-button,.button-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border:0;border-radius:11px;padding:12px 20px;background:var(--red);color:#fff;font:inherit;font-weight:800;text-decoration:none;cursor:pointer}button:hover,.button-link:hover{background:var(--red2)}button.secondary,.button-link.secondary{background:#eee6e1;color:var(--red2)}button:disabled{opacity:.6;cursor:wait}
-.actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:22px}.text-button{padding:0;min-height:auto;background:transparent;color:var(--red);text-decoration:underline;font-weight:700}.text-button:hover{background:transparent;color:var(--red2)}
-.notice{display:none;margin-top:18px;padding:13px 15px;border-radius:10px;line-height:1.45}.notice.show{display:block}.notice.success{background:#e6f4eb;color:var(--ok)}.notice.error{background:#fbe8e8;color:var(--bad)}.notice.info{background:#f2eeeb;color:#514843}
-.hidden{display:none!important}.divider{height:1px;background:var(--line);margin:28px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.metric span{display:block;color:var(--muted);font-size:.88rem}.metric strong{display:block;margin-top:7px;font-size:1.2rem}.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:#f0e4df;color:var(--red2);font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em}.security{margin-top:24px;padding:15px;background:#faf6f3;border-left:4px solid var(--red);color:var(--muted)}
-@media(max-width:600px){body{padding:14px}.shell{margin:2vh auto}.grid{grid-template-columns:1fr}.actions>*{width:100%}}
-</style></head>
-<body><main class="shell"><div class="brand"><div class="mark"></div><div><strong>BMY Dental</strong><span>Private campaign administration</span></div></div><section class="card">
-<div id="loading"><h1>Checking secure access…</h1><p class="lead">Please wait.</p></div>
-<div id="panel" class="hidden"><h1>Admin access confirmed</h1><p class="lead">Signed in as <strong id="name"></strong> (<span id="role"></span>).</p>
-<div class="grid"><div class="metric"><span>Draft campaign</span><strong id="campaign">Loading…</strong></div><div class="metric"><span>System mode</span><strong><span id="mode" class="pill">Loading</span></strong></div><div class="metric"><span>Campaign status</span><strong id="status">—</strong></div><div class="metric"><span>Recipients uploaded</span><strong id="count">0</strong></div></div><div id="notice" class="notice"></div><div class="divider"></div><h2>Current checkpoint</h2><p>Authentication and database access are connected. CSV upload and test-mode campaign controls will be added next.</p><div class="actions"><button id="refresh" class="secondary">Refresh test</button><button id="logout">Sign out</button></div><div class="security">This page contains no Twilio credentials or patient records in its source code.</div></div></section></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+.shell{width:min(1120px,100%);margin:4vh auto}.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}.mark{width:36px;height:36px;border:10px solid var(--red);border-radius:50%}.brand strong{font-size:1.35rem}.brand span{display:block;color:var(--muted);font-size:.9rem}
+.card{background:var(--white);border:1px solid var(--line);border-top:8px solid var(--red);border-radius:22px;padding:clamp(20px,4vw,36px);box-shadow:0 18px 50px rgba(70,42,30,.11)}
+h1,h2,h3{margin-top:0}h1{font-size:clamp(1.7rem,4vw,2.45rem);margin-bottom:8px}p{line-height:1.55}.lead{color:var(--muted);margin-top:0}
+button,.button-link{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:0;border-radius:11px;padding:11px 18px;background:var(--red);color:#fff;font:inherit;font-weight:800;text-decoration:none;cursor:pointer}button:hover,.button-link:hover{background:var(--red2)}button.secondary,.button-link.secondary{background:#eee6e1;color:var(--red2)}button.danger{background:#8c2424}button:disabled{opacity:.55;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:18px}.notice{display:none;margin-top:16px;padding:13px 15px;border-radius:10px;line-height:1.45}.notice.show{display:block}.notice.success{background:#e6f4eb;color:var(--ok)}.notice.error{background:#fbe8e8;color:var(--bad)}.notice.info{background:#edf3f8;color:var(--blue)}.notice.warning{background:#fff2cf;color:var(--warn)}
+.hidden{display:none!important}.divider{height:1px;background:var(--line);margin:28px 0}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.metric span{display:block;color:var(--muted);font-size:.88rem}.metric strong{display:block;margin-top:7px;font-size:1.18rem}.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:#f0e4df;color:var(--red2);font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em}
+.security{margin-top:24px;padding:15px;background:#faf6f3;border-left:4px solid var(--red);color:var(--muted)}
+.upload-box{padding:22px;border:2px dashed #cdbab0;border-radius:16px;background:#fffdfc}.upload-box input[type=file]{display:block;width:100%;margin:14px 0;font:inherit}.confirm{display:flex;gap:10px;align-items:flex-start;margin-top:16px}.confirm input{margin-top:4px;transform:scale(1.15)}
+.summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:18px 0}.summary .metric{padding:13px}.summary .metric strong{font-size:1.35rem}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:16px}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:11px 12px;border-bottom:1px solid #eadfd9;text-align:left;vertical-align:top;font-size:.9rem}th{position:sticky;top:0;background:#f4ebe6;color:#572124;z-index:1}tr:last-child td{border-bottom:0}.status{font-weight:800}.eligible{color:var(--ok)}.excluded{color:var(--bad)}.duplicate{color:var(--warn)}.invalid_phone{color:var(--bad)}
+code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem;color:var(--muted)}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){body{padding:12px}.shell{margin:2vh auto}.grid,.summary{grid-template-columns:1fr}.actions>*{width:100%}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="brand"><div class="mark" aria-hidden="true"></div><div><strong>BMY Dental</strong><span>Private campaign administration</span></div></div>
+  <section class="card">
+    <div id="loading"><h1>Checking secure access…</h1><p class="lead">Please wait.</p></div>
+
+    <div id="panel" class="hidden">
+      <h1>Campaign preparation</h1>
+      <p class="lead">Signed in as <strong id="name"></strong> (<span id="role"></span>).</p>
+
+      <div class="grid">
+        <div class="metric"><span>Draft campaign</span><strong id="campaign">Loading…</strong></div>
+        <div class="metric"><span>System mode</span><strong><span id="mode" class="pill">Loading</span></strong></div>
+        <div class="metric"><span>Campaign status</span><strong id="campaignStatus">—</strong></div>
+        <div class="metric"><span>Recipients stored</span><strong id="storedCount">0</strong></div>
+      </div>
+
+      <div id="dashboardNotice" class="notice" aria-live="polite"></div>
+
+      <div class="divider"></div>
+
+      <h2>Step 3 — Test CSV upload</h2>
+      <p>
+        Use only fictional test data during this checkpoint. The uploader will normalize
+        U.S. phone numbers, check consent, detect duplicates, and compare valid numbers
+        with the permanent suppression list.
+      </p>
+
+      <div class="upload-box">
+        <a class="button-link secondary" href="./sample-test-recipients.csv" download>Download sample test CSV</a>
+
+        <label for="csvFile"><strong>Select a CSV file</strong></label>
+        <input id="csvFile" type="file" accept=".csv,text/csv">
+
+        <div class="confirm">
+          <input id="testOnly" type="checkbox">
+          <label for="testOnly">
+            I confirm this file contains fictional test data only and no real patient information.
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="analyzeButton" type="button" disabled>Analyze CSV</button>
+          <button id="importButton" type="button" disabled>Import validated test rows</button>
+          <button id="clearButton" class="danger" type="button">Clear test recipients</button>
+        </div>
+      </div>
+
+      <div id="uploadNotice" class="notice" aria-live="polite"></div>
+
+      <div id="previewSection" class="hidden">
+        <div class="summary">
+          <div class="metric"><span>CSV rows</span><strong id="sumRows">0</strong></div>
+          <div class="metric"><span>Eligible</span><strong id="sumEligible">0</strong></div>
+          <div class="metric"><span>Excluded</span><strong id="sumExcluded">0</strong></div>
+          <div class="metric"><span>Duplicates</span><strong id="sumDuplicate">0</strong></div>
+          <div class="metric"><span>Invalid phones</span><strong id="sumInvalid">0</strong></div>
+        </div>
+
+        <p class="small">Preview displays up to the first 50 parsed rows.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Reference</th><th>Name</th><th>Normalized phone</th><th>Language</th>
+              <th>Consent</th><th>Opted out</th><th>Status</th><th>Reason</th>
+            </tr></thead>
+            <tbody id="previewBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="actions">
+        <button id="refreshButton" class="secondary" type="button">Refresh dashboard</button>
+        <button id="logoutButton" type="button">Sign out</button>
+      </div>
+
+      <div class="security">
+        This test importer uses the authenticated browser session and existing Row Level
+        Security policies. It contains no secret key, Twilio credential, or patient file.
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
 const SUPABASE_URL='https://mpyvzsfghxqppmaozcrb.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_frWVqQ-gQkmWp9Y0hrWlbw_PydxExjM';
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{
  auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
 });
 
-const loading=document.getElementById("loading"),panel=document.getElementById("panel"),notice=document.getElementById("notice"),refresh=document.getElementById("refresh"),logout=document.getElementById("logout");
-function show(msg,type){notice.textContent=msg;notice.className=`notice show ${type}`}
-async function authorized(){const{data:{session},error}=await supabaseClient.auth.getSession();if(error)throw error;if(!session?.user){location.replace("./");return null}const{data:profile,error:pe}=await supabaseClient.from("sms_admin_profiles").select("user_id,full_name,role,active").eq("user_id",session.user.id).maybeSingle();if(pe)throw pe;if(!profile||!profile.active){await supabaseClient.auth.signOut();location.replace("./");return null}return{session,profile}}
-async function load(){refresh.disabled=true;try{const a=await authorized();if(!a)return;document.getElementById("name").textContent=a.profile.full_name||a.session.user.email;document.getElementById("role").textContent=a.profile.role;const{data:c,error:ce}=await supabaseClient.from("sms_campaigns").select("id,name,status,send_mode,created_at").order("created_at",{ascending:false}).limit(1);if(ce)throw ce;if(!c?.[0])throw new Error("No SMS campaign was found.");const x=c[0];document.getElementById("campaign").textContent=x.name;document.getElementById("mode").textContent=x.send_mode;document.getElementById("status").textContent=x.status;const{count,error:co}=await supabaseClient.from("sms_recipients").select("id",{count:"exact",head:true}).eq("campaign_id",x.id);if(co)throw co;document.getElementById("count").textContent=String(count??0);loading.classList.add("hidden");panel.classList.remove("hidden");show("Secure login and Row Level Security test passed.","success")}catch(e){loading.classList.add("hidden");panel.classList.remove("hidden");show(e.message||"Secure dashboard test failed.","error")}finally{refresh.disabled=false}}
-refresh.addEventListener("click",load);logout.addEventListener("click",async()=>{logout.disabled=true;await supabaseClient.auth.signOut();location.replace("./")});load();</script></body></html>
+
+const MAX_TEST_ROWS=25;
+let currentCampaign=null;
+let analyzedRows=[];
+
+const loading=document.getElementById("loading");
+const panel=document.getElementById("panel");
+const dashboardNotice=document.getElementById("dashboardNotice");
+const uploadNotice=document.getElementById("uploadNotice");
+const csvFile=document.getElementById("csvFile");
+const testOnly=document.getElementById("testOnly");
+const analyzeButton=document.getElementById("analyzeButton");
+const importButton=document.getElementById("importButton");
+const clearButton=document.getElementById("clearButton");
+const previewSection=document.getElementById("previewSection");
+const previewBody=document.getElementById("previewBody");
+const refreshButton=document.getElementById("refreshButton");
+const logoutButton=document.getElementById("logoutButton");
+
+function notice(el,msg,type){el.textContent=msg;el.className=`notice show ${type}`}
+function clearNotice(el){el.textContent="";el.className="notice"}
+function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+
+async function requireAdmin(){
+  const{data:{session},error}=await supabaseClient.auth.getSession();
+  if(error)throw error;
+  if(!session?.user){location.replace("./");return null}
+  const{data:profile,error:profileError}=await supabaseClient
+    .from("sms_admin_profiles")
+    .select("user_id,full_name,role,active")
+    .eq("user_id",session.user.id)
+    .maybeSingle();
+  if(profileError)throw profileError;
+  if(!profile||!profile.active){await supabaseClient.auth.signOut();location.replace("./");return null}
+  return{session,profile};
+}
+
+async function loadDashboard(){
+  refreshButton.disabled=true;
+  try{
+    const auth=await requireAdmin(); if(!auth)return;
+    document.getElementById("name").textContent=auth.profile.full_name||auth.session.user.email;
+    document.getElementById("role").textContent=auth.profile.role;
+
+    const{data:campaigns,error}=await supabaseClient
+      .from("sms_campaigns")
+      .select("id,name,status,send_mode,created_at")
+      .order("created_at",{ascending:false})
+      .limit(1);
+    if(error)throw error;
+    if(!campaigns?.[0])throw new Error("No SMS campaign was found.");
+    currentCampaign=campaigns[0];
+
+    document.getElementById("campaign").textContent=currentCampaign.name;
+    document.getElementById("mode").textContent=currentCampaign.send_mode;
+    document.getElementById("campaignStatus").textContent=currentCampaign.status;
+
+    const{count,error:countError}=await supabaseClient
+      .from("sms_recipients")
+      .select("id",{count:"exact",head:true})
+      .eq("campaign_id",currentCampaign.id);
+    if(countError)throw countError;
+    document.getElementById("storedCount").textContent=String(count??0);
+
+    if(currentCampaign.send_mode!=="test"){
+      notice(uploadNotice,"CSV test importing is disabled because this campaign is not in test mode.","error");
+      analyzeButton.disabled=true; importButton.disabled=true;
+    }
+
+    loading.classList.add("hidden");
+    panel.classList.remove("hidden");
+    notice(dashboardNotice,"Secure login and database access remain active.","success");
+  }catch(e){
+    loading.classList.add("hidden"); panel.classList.remove("hidden");
+    notice(dashboardNotice,e.message||"Unable to load the dashboard.","error");
+  }finally{refreshButton.disabled=false}
+}
+
+function parseCSV(text){
+  const rows=[]; let row=[]; let field=""; let quoted=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i],next=text[i+1];
+    if(quoted){
+      if(ch==='"'&&next==='"'){field+='"';i++}
+      else if(ch==='"')quoted=false;
+      else field+=ch;
+    }else{
+      if(ch==='"')quoted=true;
+      else if(ch===','){row.push(field);field=""}
+      else if(ch==='\n'){row.push(field);rows.push(row);row=[];field=""}
+      else if(ch!=='\r')field+=ch;
+    }
+  }
+  if(field.length||row.length){row.push(field);rows.push(row)}
+  return rows.filter(r=>r.some(v=>String(v).trim()!==""));
+}
+
+function normalizeHeader(value){
+  return String(value??"").trim().toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"");
+}
+function truthy(value){return ["yes","y","true","1"].includes(String(value??"").trim().toLowerCase())}
+function normalizePhone(value){
+  const digits=String(value??"").replace(/\D/g,"");
+  if(digits.length===10)return "+1"+digits;
+  if(digits.length===11&&digits.startsWith("1"))return "+"+digits;
+  return null;
+}
+function normalizeLanguage(value){
+  const v=String(value??"").trim().toLowerCase();
+  if(["english","en"].includes(v))return "english";
+  if(["chinese","traditional chinese","zh","zh-tw","中文","繁體中文"].includes(v))return "chinese";
+  if(["bilingual","both","english/chinese"].includes(v))return "bilingual";
+  return "unknown";
+}
+function readableName(row){return [row.first_name,row.last_name].filter(Boolean).join(" ")||"—"}
+
+async function suppressionSet(phones){
+  const result=new Set();
+  for(let i=0;i<phones.length;i+=100){
+    const chunk=phones.slice(i,i+100);
+    if(!chunk.length)continue;
+    const{data,error}=await supabaseClient
+      .from("sms_suppression_list")
+      .select("phone_e164")
+      .in("phone_e164",chunk);
+    if(error)throw error;
+    (data||[]).forEach(x=>result.add(x.phone_e164));
+  }
+  return result;
+}
+
+async function analyzeCSV(){
+  clearNotice(uploadNotice);
+  analyzedRows=[]; previewSection.classList.add("hidden"); importButton.disabled=true;
+
+  if(!testOnly.checked){
+    notice(uploadNotice,"Confirm that the file contains fictional test data only.","error");return;
+  }
+  if(!csvFile.files?.[0]){notice(uploadNotice,"Choose a CSV file first.","error");return}
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){
+    notice(uploadNotice,"The campaign must remain in test mode.","error");return;
+  }
+
+  analyzeButton.disabled=true; analyzeButton.textContent="Analyzing…";
+  try{
+    const text=await csvFile.files[0].text();
+    const raw=parseCSV(text);
+    if(raw.length<2)throw new Error("The CSV contains no recipient rows.");
+    const headers=raw[0].map(normalizeHeader);
+    const required=["patient_reference","first_name","last_name","phone","preferred_language","marketing_consent","consent_timestamp","opted_out"];
+    const missing=required.filter(h=>!headers.includes(h));
+    if(missing.length)throw new Error("Missing required columns: "+missing.join(", "));
+    if(raw.length-1>MAX_TEST_ROWS)throw new Error(`Test mode accepts no more than ${MAX_TEST_ROWS} rows.`);
+
+    const mapped=raw.slice(1).map((values,index)=>{
+      const obj={_row:index+2};
+      headers.forEach((h,i)=>obj[h]=String(values[i]??"").trim());
+      obj.phone_e164=normalizePhone(obj.phone);
+      obj.preferred_language=normalizeLanguage(obj.preferred_language);
+      obj.marketing_consent_bool=truthy(obj.marketing_consent);
+      obj.opted_out_bool=truthy(obj.opted_out);
+      return obj;
+    });
+
+    const validPhones=[...new Set(mapped.map(r=>r.phone_e164).filter(Boolean))];
+    const suppressed=await suppressionSet(validPhones);
+    const seen=new Set();
+
+    analyzedRows=mapped.map(row=>{
+      let status="eligible",reason="";
+      if(!row.phone_e164){status="invalid_phone";reason="Phone number is not a valid U.S. 10-digit number";}
+      else if(seen.has(row.phone_e164)){status="duplicate";reason="Duplicate phone number within this CSV";}
+      else{
+        seen.add(row.phone_e164);
+        if(!row.marketing_consent_bool){status="excluded";reason="No documented marketing SMS consent";}
+        else if(row.opted_out_bool){status="excluded";reason="CSV marks this number as opted out";}
+        else if(suppressed.has(row.phone_e164)){status="excluded";reason="Number is on the permanent suppression list";}
+      }
+      return{...row,status,reason};
+    });
+
+    renderPreview();
+    const eligible=analyzedRows.filter(r=>r.status==="eligible").length;
+    notice(uploadNotice,`Analysis complete. ${eligible} row(s) are eligible for test import.`,"success");
+    importButton.disabled=eligible===0;
+  }catch(e){
+    notice(uploadNotice,e.message||"Unable to analyze the CSV.","error");
+  }finally{analyzeButton.disabled=false;analyzeButton.textContent="Analyze CSV"}
+}
+
+function renderPreview(){
+  const counts={eligible:0,excluded:0,duplicate:0,invalid_phone:0};
+  analyzedRows.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
+  document.getElementById("sumRows").textContent=analyzedRows.length;
+  document.getElementById("sumEligible").textContent=counts.eligible||0;
+  document.getElementById("sumExcluded").textContent=counts.excluded||0;
+  document.getElementById("sumDuplicate").textContent=counts.duplicate||0;
+  document.getElementById("sumInvalid").textContent=counts.invalid_phone||0;
+
+  previewBody.innerHTML=analyzedRows.slice(0,50).map(r=>`<tr>
+    <td>${escapeHtml(r.patient_reference||"—")}</td>
+    <td>${escapeHtml(readableName(r))}</td>
+    <td>${escapeHtml(r.phone_e164||"Invalid")}</td>
+    <td>${escapeHtml(r.preferred_language)}</td>
+    <td>${r.marketing_consent_bool?"Yes":"No"}</td>
+    <td>${r.opted_out_bool?"Yes":"No"}</td>
+    <td class="status ${r.status}">${escapeHtml(r.status)}</td>
+    <td>${escapeHtml(r.reason||"—")}</td>
+  </tr>`).join("");
+  previewSection.classList.remove("hidden");
+}
+
+async function importRows(){
+  clearNotice(uploadNotice);
+  if(!testOnly.checked){notice(uploadNotice,"Test-data confirmation is required.","error");return}
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){notice(uploadNotice,"Campaign is not in test mode.","error");return}
+
+  const importable=analyzedRows.filter(r=>r.phone_e164&&r.status!=="duplicate"&&r.status!=="invalid_phone");
+  if(!importable.length){notice(uploadNotice,"There are no valid rows to import.","error");return}
+
+  importButton.disabled=true; importButton.textContent="Importing…";
+  try{
+    const records=importable.map(r=>({
+      campaign_id:currentCampaign.id,
+      patient_reference:r.patient_reference||null,
+      first_name:r.first_name||null,
+      last_name:r.last_name||null,
+      phone_e164:r.phone_e164,
+      preferred_language:r.preferred_language,
+      marketing_consent:r.marketing_consent_bool,
+      consent_source:"fictional_test_csv",
+      consent_timestamp:r.consent_timestamp||null,
+      opted_out:r.opted_out_bool,
+      eligibility_status:r.status==="eligible"?"eligible":"excluded",
+      exclusion_reason:r.reason||null,
+      send_status:r.status==="eligible"?"not_sent":"suppressed"
+    }));
+
+    for(let i=0;i<records.length;i+=100){
+      const chunk=records.slice(i,i+100);
+      const{error}=await supabaseClient
+        .from("sms_recipients")
+        .upsert(chunk,{onConflict:"campaign_id,phone_e164"});
+      if(error)throw error;
+    }
+    notice(uploadNotice,`${records.length} validated test row(s) were stored successfully.`,"success");
+    await loadDashboard();
+  }catch(e){
+    notice(uploadNotice,e.message||"Unable to import the test rows.","error");
+  }finally{importButton.disabled=false;importButton.textContent="Import validated test rows"}
+}
+
+async function clearTestRows(){
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){notice(uploadNotice,"Campaign is not in test mode.","error");return}
+  if(!confirm("Delete all recipients stored for this TEST campaign?"))return;
+  clearButton.disabled=true; clearButton.textContent="Clearing…";
+  try{
+    const{error}=await supabaseClient.from("sms_recipients").delete().eq("campaign_id",currentCampaign.id);
+    if(error)throw error;
+    analyzedRows=[]; previewSection.classList.add("hidden"); importButton.disabled=true;
+    notice(uploadNotice,"All test recipients were removed.","success");
+    await loadDashboard();
+  }catch(e){notice(uploadNotice,e.message||"Unable to clear test recipients.","error")}
+  finally{clearButton.disabled=false;clearButton.textContent="Clear test recipients"}
+}
+
+csvFile.addEventListener("change",()=>{analyzeButton.disabled=!csvFile.files?.length||!testOnly.checked});
+testOnly.addEventListener("change",()=>{analyzeButton.disabled=!csvFile.files?.length||!testOnly.checked});
+analyzeButton.addEventListener("click",analyzeCSV);
+importButton.addEventListener("click",importRows);
+clearButton.addEventListener("click",clearTestRows);
+refreshButton.addEventListener("click",loadDashboard);
+logoutButton.addEventListener("click",async()=>{logoutButton.disabled=true;await supabaseClient.auth.signOut();location.replace("./")});
+loadDashboard();
+</script>
+</body>
+</html>
