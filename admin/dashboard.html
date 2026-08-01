@@ -15,7 +15,7 @@ button,.button-link{display:inline-flex;align-items:center;justify-content:cente
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:18px}.notice{display:none;margin-top:16px;padding:13px 15px;border-radius:10px;line-height:1.45}.notice.show{display:block}.notice.success{background:#e6f4eb;color:var(--ok)}.notice.error{background:#fbe8e8;color:var(--bad)}.notice.info{background:#edf3f8;color:var(--blue)}.notice.warning{background:#fff2cf;color:var(--warn)}
 .hidden{display:none!important}.divider{height:1px;background:var(--line);margin:28px 0}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.metric span{display:block;color:var(--muted);font-size:.88rem}.metric strong{display:block;margin-top:7px;font-size:1.18rem}.pill{display:inline-block;padding:5px 10px;border-radius:999px;background:#f0e4df;color:var(--red2);font-weight:800;text-transform:uppercase;font-size:.75rem;letter-spacing:.04em}
 .security{margin-top:24px;padding:15px;background:#faf6f3;border-left:4px solid var(--red);color:var(--muted)}
-.upload-box{padding:22px;border:2px dashed #cdbab0;border-radius:16px;background:#fffdfc}.upload-box input[type=file]{display:block;width:100%;margin:14px 0;font:inherit}.confirm{display:flex;gap:10px;align-items:flex-start;margin-top:16px}.confirm input{margin-top:4px;transform:scale(1.15)}
+.upload-box{padding:22px;border:2px dashed #cdbab0;border-radius:16px;background:#fffdfc}select,textarea{width:100%;padding:12px 14px;border:1px solid #baa99f;border-radius:11px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:170px;resize:vertical;line-height:1.5}select:focus,textarea:focus{outline:3px solid rgba(143,23,27,.16);border-color:var(--red)}.message-layout{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,2fr);gap:18px;margin:18px 0}.message-panel{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fffdfc}.message-panel label{display:block;margin-bottom:8px;font-weight:800}.simulation-table{min-width:900px}.simulated{color:var(--blue)}@media(max-width:760px){.message-layout{grid-template-columns:1fr}}.upload-box input[type=file]{display:block;width:100%;margin:14px 0;font:inherit}.confirm{display:flex;gap:10px;align-items:flex-start;margin-top:16px}.confirm input{margin-top:4px;transform:scale(1.15)}
 .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:18px 0}.summary .metric{padding:13px}.summary .metric strong{font-size:1.35rem}
 .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:16px}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:11px 12px;border-bottom:1px solid #eadfd9;text-align:left;vertical-align:top;font-size:.9rem}th{position:sticky;top:0;background:#f4ebe6;color:#572124;z-index:1}tr:last-child td{border-bottom:0}.status{font-weight:800}.eligible{color:var(--ok)}.excluded{color:var(--bad)}.duplicate{color:var(--warn)}.invalid_phone{color:var(--bad)}
 code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem;color:var(--muted)}
@@ -95,14 +95,77 @@ code{background:#f4eeea;padding:2px 5px;border-radius:5px}.small{font-size:.9rem
       </div>
 
       <div class="divider"></div>
+
+      <section id="simulationSection">
+        <h2>Step 4 — Simulated message sending</h2>
+        <p>
+          This checkpoint does not send any SMS. It selects the appropriate campaign
+          message, records a simulated send, and updates the test audit trail.
+        </p>
+
+        <div class="message-layout">
+          <div class="message-panel">
+            <label for="messageStrategy">Message selection</label>
+            <select id="messageStrategy">
+              <option value="automatic">Automatic by preferred language</option>
+              <option value="english">Force English for all eligible test rows</option>
+              <option value="chinese">Force Chinese for all eligible test rows</option>
+              <option value="bilingual">Force bilingual for all eligible test rows</option>
+            </select>
+            <p class="small">
+              Automatic mode uses English for English recipients, Chinese for Chinese
+              recipients, and bilingual for bilingual or unknown recipients.
+            </p>
+          </div>
+
+          <div class="message-panel">
+            <label for="messagePreview">Selected message preview</label>
+            <textarea id="messagePreview" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="metric"><span>Eligible test rows</span><strong id="simEligible">0</strong></div>
+          <div class="metric"><span>Not yet simulated</span><strong id="simNotSent">0</strong></div>
+          <div class="metric"><span>Simulated sent</span><strong id="simSent">0</strong></div>
+          <div class="metric"><span>Excluded rows</span><strong id="simExcluded">0</strong></div>
+          <div class="metric"><span>Actual texts sent</span><strong>0</strong></div>
+        </div>
+
+        <div class="actions">
+          <button id="simulateButton" type="button">Simulate test send</button>
+          <button id="resetSimulationButton" class="secondary" type="button">Reset simulation</button>
+        </div>
+
+        <div id="simulationNotice" class="notice" aria-live="polite"></div>
+
+        <div class="table-wrap">
+          <table class="simulation-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Language</th>
+                <th>Eligibility</th>
+                <th>Message version</th>
+                <th>Test send status</th>
+              </tr>
+            </thead>
+            <tbody id="simulationBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="divider"></div>
       <div class="actions">
         <button id="refreshButton" class="secondary" type="button">Refresh dashboard</button>
         <button id="logoutButton" type="button">Sign out</button>
       </div>
 
       <div class="security">
-        This test importer uses the authenticated browser session and existing Row Level
-        Security policies. It contains no secret key, Twilio credential, or patient file.
+        This test importer and simulation use the authenticated browser session and existing
+        Row Level Security policies. No actual SMS is sent, and no Twilio credential is present.
       </div>
     </div>
   </section>
@@ -121,6 +184,7 @@ const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHA
 const MAX_TEST_ROWS=25;
 let currentCampaign=null;
 let analyzedRows=[];
+let simulationRecipients=[];
 
 const loading=document.getElementById("loading");
 const panel=document.getElementById("panel");
@@ -135,6 +199,12 @@ const previewSection=document.getElementById("previewSection");
 const previewBody=document.getElementById("previewBody");
 const refreshButton=document.getElementById("refreshButton");
 const logoutButton=document.getElementById("logoutButton");
+const messageStrategy=document.getElementById("messageStrategy");
+const messagePreview=document.getElementById("messagePreview");
+const simulateButton=document.getElementById("simulateButton");
+const resetSimulationButton=document.getElementById("resetSimulationButton");
+const simulationNotice=document.getElementById("simulationNotice");
+const simulationBody=document.getElementById("simulationBody");
 
 function notice(el,msg,type){el.textContent=msg;el.className=`notice show ${type}`}
 function clearNotice(el){el.textContent="";el.className="notice"}
@@ -163,7 +233,7 @@ async function loadDashboard(){
 
     const{data:campaigns,error}=await supabaseClient
       .from("sms_campaigns")
-      .select("id,name,status,send_mode,created_at")
+      .select("id,name,status,send_mode,created_at,message_english,message_chinese,message_bilingual")
       .order("created_at",{ascending:false})
       .limit(1);
     if(error)throw error;
@@ -180,6 +250,7 @@ async function loadDashboard(){
       .eq("campaign_id",currentCampaign.id);
     if(countError)throw countError;
     document.getElementById("storedCount").textContent=String(count??0);
+    await loadSimulationRecipients();
 
     if(currentCampaign.send_mode!=="test"){
       notice(uploadNotice,"CSV test importing is disabled because this campaign is not in test mode.","error");
@@ -382,6 +453,274 @@ async function clearTestRows(){
   }catch(e){notice(uploadNotice,e.message||"Unable to clear test recipients.","error")}
   finally{clearButton.disabled=false;clearButton.textContent="Clear test recipients"}
 }
+
+
+function displayName(recipient){
+  return [recipient.first_name,recipient.last_name].filter(Boolean).join(" ")||"—";
+}
+
+function automaticVersion(recipient){
+  if(recipient.preferred_language==="english")return "english";
+  if(recipient.preferred_language==="chinese")return "chinese";
+  return "bilingual";
+}
+
+function selectedVersion(recipient){
+  return messageStrategy.value==="automatic"
+    ? automaticVersion(recipient)
+    : messageStrategy.value;
+}
+
+function messageForVersion(version){
+  if(!currentCampaign)return "";
+  if(version==="english")return currentCampaign.message_english||"";
+  if(version==="chinese")return currentCampaign.message_chinese||"";
+  return currentCampaign.message_bilingual||"";
+}
+
+function updateMessagePreview(){
+  if(!currentCampaign){
+    messagePreview.value="";
+    return;
+  }
+
+  if(messageStrategy.value==="automatic"){
+    messagePreview.value =
+      "AUTOMATIC MESSAGE SELECTION\n\n" +
+      "English recipient → English campaign message\n" +
+      "Chinese recipient → Chinese campaign message\n" +
+      "Bilingual or unknown recipient → Bilingual campaign message\n\n" +
+      "Select a forced language from the dropdown to preview the exact message.";
+  }else{
+    messagePreview.value=messageForVersion(messageStrategy.value);
+  }
+
+  renderSimulationTable();
+}
+
+async function loadSimulationRecipients(){
+  if(!currentCampaign)return;
+
+  const{data,error}=await supabaseClient
+    .from("sms_recipients")
+    .select("id,patient_reference,first_name,last_name,phone_e164,preferred_language,eligibility_status,exclusion_reason,send_status,sent_at,provider_message_id")
+    .eq("campaign_id",currentCampaign.id)
+    .order("created_at",{ascending:true});
+
+  if(error)throw error;
+  simulationRecipients=data||[];
+
+  const eligible=simulationRecipients.filter(r=>r.eligibility_status==="eligible");
+  const excluded=simulationRecipients.filter(r=>r.eligibility_status!=="eligible");
+  const simulated=eligible.filter(r=>r.send_status==="sent");
+  const notSent=eligible.filter(r=>r.send_status!=="sent");
+
+  document.getElementById("simEligible").textContent=String(eligible.length);
+  document.getElementById("simExcluded").textContent=String(excluded.length);
+  document.getElementById("simSent").textContent=String(simulated.length);
+  document.getElementById("simNotSent").textContent=String(notSent.length);
+
+  simulateButton.disabled =
+    currentCampaign.send_mode!=="test" ||
+    eligible.length===0 ||
+    notSent.length===0;
+
+  resetSimulationButton.disabled =
+    currentCampaign.send_mode!=="test" ||
+    simulated.length===0;
+
+  updateMessagePreview();
+}
+
+function renderSimulationTable(){
+  if(!simulationBody)return;
+
+  simulationBody.innerHTML=simulationRecipients.map(r=>{
+    const isEligible=r.eligibility_status==="eligible";
+    const version=isEligible?selectedVersion(r):"—";
+    const statusLabel=isEligible
+      ? (r.send_status==="sent"?"SIMULATED SENT":"NOT SENT")
+      : "EXCLUDED";
+    const statusClass=isEligible
+      ? (r.send_status==="sent"?"simulated":"")
+      : "excluded";
+
+    return `<tr>
+      <td>${escapeHtml(r.patient_reference||"—")}</td>
+      <td>${escapeHtml(displayName(r))}</td>
+      <td>${escapeHtml(r.phone_e164||"—")}</td>
+      <td>${escapeHtml(r.preferred_language||"unknown")}</td>
+      <td class="status ${isEligible?"eligible":"excluded"}">
+        ${escapeHtml(r.eligibility_status)}
+      </td>
+      <td>${escapeHtml(version)}</td>
+      <td class="status ${statusClass}">${escapeHtml(statusLabel)}</td>
+    </tr>`;
+  }).join("");
+}
+
+async function simulateTestSend(){
+  clearNotice(simulationNotice);
+
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){
+    notice(simulationNotice,"Simulation is available only while the campaign is in TEST mode.","error");
+    return;
+  }
+
+  const pending=simulationRecipients.filter(
+    r=>r.eligibility_status==="eligible"&&r.send_status!=="sent"
+  );
+
+  if(!pending.length){
+    notice(simulationNotice,"There are no eligible unsimulated recipients.","info");
+    return;
+  }
+
+  const confirmation=
+    `Simulate sending to ${pending.length} eligible test recipient(s)?\n\n`+
+    "No actual SMS will be sent.";
+
+  if(!confirm(confirmation))return;
+
+  simulateButton.disabled=true;
+  simulateButton.textContent="Simulating…";
+
+  try{
+    const now=new Date().toISOString();
+    const eventRows=[];
+
+    for(const recipient of pending){
+      const version=selectedVersion(recipient);
+      const messageText=messageForVersion(version);
+      const simulatedId="SIM-"+crypto.randomUUID();
+
+      const{error:updateError}=await supabaseClient
+        .from("sms_recipients")
+        .update({
+          send_status:"sent",
+          sent_at:now,
+          provider_message_id:simulatedId
+        })
+        .eq("id",recipient.id)
+        .eq("campaign_id",currentCampaign.id);
+
+      if(updateError)throw updateError;
+
+      eventRows.push({
+        campaign_id:currentCampaign.id,
+        recipient_id:recipient.id,
+        event_type:"test_message_simulated",
+        event_data:{
+          mode:"test",
+          message_version:version,
+          message_text:messageText,
+          simulated_message_id:simulatedId,
+          simulated_at:now,
+          actual_sms_sent:false
+        }
+      });
+    }
+
+    const{error:eventError}=await supabaseClient
+      .from("sms_event_log")
+      .insert(eventRows);
+
+    if(eventError)throw eventError;
+
+    const{error:campaignError}=await supabaseClient
+      .from("sms_campaigns")
+      .update({
+        status:"testing",
+        started_at:currentCampaign.started_at||now
+      })
+      .eq("id",currentCampaign.id)
+      .eq("send_mode","test");
+
+    if(campaignError)throw campaignError;
+
+    notice(
+      simulationNotice,
+      `${pending.length} test message(s) were simulated. No actual SMS was sent.`,
+      "success"
+    );
+    await loadDashboard();
+  }catch(error){
+    notice(
+      simulationNotice,
+      error.message||"The simulated send could not be completed.",
+      "error"
+    );
+  }finally{
+    simulateButton.textContent="Simulate test send";
+  }
+}
+
+async function resetSimulation(){
+  clearNotice(simulationNotice);
+
+  if(!currentCampaign||currentCampaign.send_mode!=="test"){
+    notice(simulationNotice,"Reset is available only in TEST mode.","error");
+    return;
+  }
+
+  if(!confirm("Reset all simulated send results for this test campaign?"))return;
+
+  resetSimulationButton.disabled=true;
+  resetSimulationButton.textContent="Resetting…";
+
+  try{
+    const{error:recipientError}=await supabaseClient
+      .from("sms_recipients")
+      .update({
+        send_status:"not_sent",
+        sent_at:null,
+        delivered_at:null,
+        failed_at:null,
+        provider_message_id:null,
+        failure_code:null,
+        failure_message:null
+      })
+      .eq("campaign_id",currentCampaign.id)
+      .eq("eligibility_status","eligible");
+
+    if(recipientError)throw recipientError;
+
+    const{error:eventError}=await supabaseClient
+      .from("sms_event_log")
+      .delete()
+      .eq("campaign_id",currentCampaign.id)
+      .eq("event_type","test_message_simulated");
+
+    if(eventError)throw eventError;
+
+    const{error:campaignError}=await supabaseClient
+      .from("sms_campaigns")
+      .update({
+        status:"draft",
+        started_at:null,
+        completed_at:null
+      })
+      .eq("id",currentCampaign.id)
+      .eq("send_mode","test");
+
+    if(campaignError)throw campaignError;
+
+    notice(simulationNotice,"The simulated send was reset successfully.","success");
+    await loadDashboard();
+  }catch(error){
+    notice(
+      simulationNotice,
+      error.message||"The simulated send could not be reset.",
+      "error"
+    );
+  }finally{
+    resetSimulationButton.textContent="Reset simulation";
+  }
+}
+
+messageStrategy.addEventListener("change",updateMessagePreview);
+simulateButton.addEventListener("click",simulateTestSend);
+resetSimulationButton.addEventListener("click",resetSimulation);
 
 csvFile.addEventListener("change",()=>{analyzeButton.disabled=!csvFile.files?.length||!testOnly.checked});
 testOnly.addEventListener("change",()=>{analyzeButton.disabled=!csvFile.files?.length||!testOnly.checked});
